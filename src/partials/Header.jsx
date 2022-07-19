@@ -96,8 +96,9 @@ function Header() {
           {/* Site branding */}
           <div className="shrink-0 mr-4">
             {/* Logo */}
-            <Link to="/" className="block" aria-label="Cruip">
-              <img src={Logo} alt="" className="w-8 h-8 fill-current text-purple-600"/>
+            <Link to="/" className="flex" aria-label="Cruip">
+              <img src={Logo} alt="" className="w-10 h-10 fill-current text-purple-600"/>
+              <span className='text-2xl ml-2'>Keen Finace</span>
             </Link>
           </div>
 
@@ -107,22 +108,21 @@ function Header() {
             {/* Desktop menu links */}
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
-                <Link to="/features" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">
-                  Features
-                </Link>
+                <a href="https://medium.com/@keen.finance/test-5c3d670fc962" target={"_blank"} className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">
+                  {t('Token Economics')}
+                </a>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/pricing" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Pricing</Link>
-              </li>
+              </li> */}
               <li>
-                <Link to="/blog" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Blog</Link>
+                <a href="https://medium.com/@keen.finance" target={"_blank"} className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">{t('Blog')}</a>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/about" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">About us</Link>
-              </li>
+              </li> */}
               {/* 1st level: hover */}
-              <Dropdown title="Support">
-                {/* 2nd level: hover */}
+              {/* <Dropdown title="Support">
                 <li>
                   <Link to="/contact" className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight">Contact us</Link>
                 </li>
@@ -132,12 +132,12 @@ function Header() {
                 <li>
                   <Link to="/404" className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight">404</Link>
                 </li>
-              </Dropdown>
+              </Dropdown> */}
             </ul>
 
             {/* Desktop sign in links */}
             <ul className="flex grow justify-end flex-wrap items-center">
-              <li>
+              <li className='hidden'>
                 <Link to="/features" className="font-medium w-full inline-flex items-center justify-center border border-purple-600 hover:border-purple-700 px-4 py-2 my-2 rounded-sm text-purple-600 bg-transparent  transition duration-150 ease-in-out">
                   {t('Open app')}
                 </Link>
@@ -192,7 +192,7 @@ function Header() {
                 {/* <li>
                   <Link to="/signin" className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center">Sign in</Link>
                 </li> */}
-                <li>
+                <li className='hidden'>
                   <Link to="/features" className="font-medium w-full inline-flex items-center justify-center border border-purple-600 hover:border-purple-700 px-4 py-2 my-2 rounded-sm text-purple-600 bg-transparent  transition duration-150 ease-in-out">
                     {t('Open app')}
                   </Link>

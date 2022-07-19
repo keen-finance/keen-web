@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from "../images/logo/logo.jpg"
+import { useTranslation } from 'react-i18next';
 
 function Footer() {
+  const { t, i18n } = useTranslation();
   return (
     <footer>
       <div className="py-12 md:py-16">
@@ -15,18 +17,19 @@ function Footer() {
             <div className="md:col-span-4 lg:col-span-5">
               <div className="mb-2">
                 {/* Logo */}
-                <Link to="/" className="inline-block" aria-label="Cruip">
-                  <img src={Logo} alt="" className="w-8 h-8 fill-current text-purple-600"/>
+                <Link to="/" className="flex" aria-label="Cruip">
+                  <img src={Logo} alt="" className="w-10 h-10 fill-current text-purple-600"/>
+                  
                 </Link>
               </div>
-              <div className="text-gray-400">Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</div>
+              <div className="text-gray-400">{t("Home Sub Tile")}</div>
             </div>
 
             {/* 2nd, 3rd and 4th blocks */}
             <div className="md:col-span-8 lg:col-span-7 grid sm:grid-cols-3 gap-8">
 
               {/* 2nd block */}
-              <div className="text-sm">
+              {/* <div className="text-sm">
                 <h6 className="text-gray-200 font-medium mb-1">Products</h6>
                 <ul>
                   <li className="mb-1">
@@ -39,10 +42,10 @@ function Footer() {
                     <Link to="#" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Programming Forms</Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
 
               {/* 3rd block */}
-              <div className="text-sm">
+              {/* <div className="text-sm">
                 <h6 className="text-gray-200 font-medium mb-1">Resources</h6>
                 <ul>
                   <li className="mb-1">
@@ -61,10 +64,10 @@ function Footer() {
                     <Link to="#" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Nostrud exercitation</Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
 
               {/* 4th block */}
-              <div className="text-sm">
+              {/* <div className="text-sm">
                 <h6 className="text-gray-200 font-medium mb-1">Company</h6>
                 <ul>
                   <li className="mb-1">
@@ -83,7 +86,7 @@ function Footer() {
                     <Link to="#" className="text-gray-400 hover:text-gray-100 transition duration-150 ease-in-out">Consectetur adipiscing</Link>
                   </li>
                 </ul>
-              </div>
+              </div> */}
 
             </div>
 
@@ -134,7 +137,7 @@ function Footer() {
             </ul>
 
             {/* Copyrights note */}
-            <div className="text-gray-400 text-sm mr-4">&copy; 2020 Open PRO. All rights reserved.</div>
+            <div className="text-gray-400 text-sm mr-4">&copy; 2022 Open PRO. All rights reserved.</div>
 
           </div>
 

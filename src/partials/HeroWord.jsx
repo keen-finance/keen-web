@@ -3,6 +3,7 @@ import React,{useState} from 'react';
 import PlanetImage from '../images/planet.png';
 import Avatar01 from '../images/avator_1.jpeg';
 import Avatar02 from '../images/avator_2.jpeg';
+import Avatar03 from '../images/avator_3.jpeg';
 import PlanetAvatar04 from '../images/planet-avatar-04.png';
 import PlanetAvatar05 from '../images/planet-avatar-05.png';
 import { useTranslation } from 'react-i18next';
@@ -106,7 +107,7 @@ function HeroWord() {
               <div className="absolute max-w-full transform animate-float w-full" style={{  top: '60.5%', left: '60.8%' }}>
                 
                 <img  src={Avatar02} className="w-10 rounded-full" alt="Planet avatar 03" />
-                <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-5 left-5 h-6 w-6 text-purple-700 animate-pulse transition duration-75  flex md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" onClick={(e) => { e.preventDefault(); e.stopPropagation();setBasicModalContent("China"); setBasicModalOpen(true) }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-5 left-5 h-6 w-6 text-purple-700 animate-pulse   flex md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" onClick={(e) => { e.preventDefault(); e.stopPropagation();setBasicModalContent("China"); setBasicModalOpen(true) }}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
                 <span className='inline-flex text-left text-gray-100 py-1 px-3 rounded-full bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out  hidden md:flex'>
@@ -118,7 +119,7 @@ function HeroWord() {
                 <span className='inline-flex text-left text-gray-100 py-1 px-3 rounded-full bg-green-600 hover:bg-green-700 transition duration-150 ease-in-out  hidden md:flex'>
                 {t("Russia Title")+t("Russia Content")}
                 </span>
-                <img  src={Avatar02} className="w-10 rounded-full" alt="Planet avatar 03" />
+                <img  src={Avatar03} className="w-10 rounded-full" alt="Planet avatar 03" />
                 <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-5 left-5 h-6 w-6 text-green-700 animate-pulse transition duration-75  flex md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" onClick={(e) => { e.preventDefault(); e.stopPropagation();setBasicModalContent("Russia"); setBasicModalOpen(true) }}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
@@ -127,47 +128,7 @@ function HeroWord() {
             </div>
           </div>
 
-          {/* Items */}
-          <div className="max-w-sm mx-auto grid gap-8 md:gap-16 md:grid-cols-2 lg:grid-cols-3 items-start md:max-w-2xl lg:max-w-5xl pt-8 md:pt-12">
-
-
-            {/* 1st item */}
-            <div className="text-center">
-              <div className="h3 mb-1">2012</div>
-              <div className="text-gray-600">Lorem ipsum is placeholder text commonly used tristique senectus et netus.</div>
-            </div>
-
-            {/* 2nd item */}
-            <div className="text-center">
-              <div className="h3 mb-1">$20M</div>
-              <div className="text-gray-600">Lorem ipsum is placeholder text commonly used tristique senectus et netus.</div>
-            </div>
-
-            {/* 3rd item */}
-            <div className="text-center">
-              <div className="h3 mb-1">250M+</div>
-              <div className="text-gray-600">Lorem ipsum is placeholder text commonly used tristique senectus et netus.</div>
-            </div>
-
-            {/* 4th item */}
-            <div className="text-center">
-              <div className="h3 mb-1">2700+</div>
-              <div className="text-gray-600">Lorem ipsum is placeholder text commonly used tristique senectus et netus.</div>
-            </div>
-
-            {/* 5th item */}
-            <div className="text-center">
-              <div className="h3 mb-1">400K</div>
-              <div className="text-gray-600">Lorem ipsum is placeholder text commonly used tristique senectus et netus.</div>
-            </div>
-
-            {/* 6th item */}
-            <div className="text-center">
-              <div className="h3 mb-1">Millions</div>
-              <div className="text-gray-600">Lorem ipsum is placeholder text commonly used tristique senectus et netus.</div>
-            </div>
-
-          </div>
+          
 
         </div>
         <ModalBasic id="basic-modal" modalOpen={basicModalOpen} setModalOpen={setBasicModalOpen} title={t(basicModalType+" Title")}>
