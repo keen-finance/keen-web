@@ -82,3 +82,11 @@
 .pulse-3 {
     animation-delay: -6000ms;
 }
+
+::-webkit-scrollbar {
+    width:7px;
+    height:7px;
+    position:absolute
+}
+::-webkit-scrollbar-thumb {background-color:#ddd}
+::-webkit-scrollbar-track {background-color:#3a4a4f}

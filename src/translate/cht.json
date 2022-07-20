@@ -1,0 +1,85 @@
+{
+  "Welcome to React": "Bienvenue à React et react-i18next",
+  "header":{
+    "token_economics":"代幣經濟學",
+    "blog":"博客",
+    "trade":"貿易",
+    "cap_pool":"資金池",
+    "language":"語言",
+    "connect_wallet": "連接錢包",
+    "wallet":{
+      "connected_wallet_address":"連接的錢包地址",
+      "account":"賬號",
+      "details":"詳細信息",
+      "copy":"複製",
+      "log_out":"登出",
+      "copy_successfully":"複製成功"
+    },
+    "open_app":"打開應用"
+    
+  },
+  "home":{
+    "hero":{
+      "title":"讓您的閒置資產發揮作用",
+      "sub_title":"Keen Finance 是下一代微交易平台，讓交易變得輕鬆而有利可圖。 我們的目標是成為每個人交易和賺錢的最佳場所。",
+      "open_app":"打開應用",
+      "learn_more":"瞭解更多"
+    },
+    "world":{
+      "title":"培養全球思維",
+      "sub_title":"來自世界各地的用戶正在加入我們，他們來自俄羅斯、中國、老撾、泰國、越南……",
+      "learn_more":"瞭解更多",
+      "feedback":{
+        "china":{
+          "title":"🇨🇳 劉國福：",
+          "content":"Keen，讓我的TCP，重新復活了。"
+        },
+        "philippines":{
+          "title":"🇵🇭 馬克·約翰·桑切斯：",
+          "content":"自從有了Keen這個平台，他讓我的收益上升了很多。"
+        },
+        "russia":{
+          "title":"🇨🇷 安东·格拉申科：",
+          "content":"世上並沒有用來鼓勵工作努力的賞賜，所有的賞賜都只是被用來獎勵工作成果的。"
+        }
+      }
+    },
+    "process":{
+      "title":"只需幾步即可開始交易",
+      "sub_title":"成為交易員並在 Keen Finance 上賺錢既快捷又容易。",
+      "step":{
+        "one":{
+          "title":"創建錢包",
+          "sub_title":"使用Token Pocket、MeteMask創建錢包，成為一名優秀的區塊鏈交易者"
+        },
+        "two":{
+          "title":"購買數字貨幣",
+          "sub_title":"在幣安交易所或其他交易所購買礦工費代幣：BNB，交易代幣：USDT、TCP。"
+        },
+        "three":{
+          "title":"開始交易",
+          "sub_title":"進行交易並賺錢利潤，賺取交易獎勵代幣。"
+        }
+      }
+    },
+    "clients":{
+      "title":"受到最好企业的信任"
+    },
+    "audited":{
+      "title":"审核人"
+    },
+    "news":{
+      "one":{
+        "title":"Keen 代幣",
+        "sub_title":"$Keen 是 Keen Finance 的核心。它使您可以利用我們平台的成長和成功。",
+        "btn":"探索代幣"
+      },
+      "two":{
+        "title":"Keen Finance",
+        "sub_title":"更好的交易和賺錢方式，支持使用USDT、TCP交易賺取利潤。",
+        "btn":"探索交易"
+      }
+    }
+
+  }
+}

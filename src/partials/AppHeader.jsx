@@ -10,9 +10,18 @@ import { useWeb3React } from "@web3-react/core";
 import { connectors } from "../utils/connectors";
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+import Logo from "../images/logo/logo.jpg"
+import CN from "../images/flags/cn.svg"
+import GB from "../images/flags/gb.svg"
+import HK from "../images/flags/hk.svg"
+import JP from "../images/flags/jp.svg"
+import KR from "../images/flags/kr.svg"
+import PH from "../images/flags/ph.svg"
+import RU from "../images/flags/ru.svg"
+import VN from "../images/flags/vn.svg"
 
 
-function AppHeader() {
+function AppHeader(props) {
   const { t, i18n } = useTranslation();
 
   const [walletModalOpen, setWalletModalOpen] = useState(false);
@@ -95,10 +104,9 @@ function AppHeader() {
           {/* Site branding */}
           <div className="shrink-0 mr-4">
             {/* Logo */}
-            <Link to="/" className="block" aria-label="Cruip">
-              <svg className="w-8 h-8 fill-current text-purple-600" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                <path d="M31.952 14.751a260.51 260.51 0 00-4.359-4.407C23.932 6.734 20.16 3.182 16.171 0c1.634.017 3.21.28 4.692.751 3.487 3.114 6.846 6.398 10.163 9.737.493 1.346.811 2.776.926 4.262zm-1.388 7.883c-2.496-2.597-5.051-5.12-7.737-7.471-3.706-3.246-10.693-9.81-15.736-7.418-4.552 2.158-4.717 10.543-4.96 16.238A15.926 15.926 0 010 16C0 9.799 3.528 4.421 8.686 1.766c1.82.593 3.593 1.675 5.038 2.587 6.569 4.14 12.29 9.71 17.792 15.57-.237.94-.557 1.846-.952 2.711zm-4.505 5.81a56.161 56.161 0 00-1.007-.823c-2.574-2.054-6.087-4.805-9.394-4.044-3.022.695-4.264 4.267-4.97 7.52a15.945 15.945 0 01-3.665-1.85c.366-3.242.89-6.675 2.405-9.364 2.315-4.107 6.287-3.072 9.613-1.132 3.36 1.96 6.417 4.572 9.313 7.417a16.097 16.097 0 01-2.295 2.275z" />
-              </svg>
+            <Link to="/" className="flex" aria-label="Cruip">
+              <img src={Logo} alt="" className="w-8 h-8"/>
+              <span className='text-2xl font-mono font-medium ml-2  hidden md:flex'>Keen Finace</span>
             </Link>
           </div>
 
@@ -108,31 +116,56 @@ function AppHeader() {
             {/* Desktop menu links */}
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
-                <Link to="/features" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">
-                  Features
+                <Link  to="/trade" className={`text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out ${props.current == 'trade' && 'cursor-default text-purple-700 hover:text-purple-800'}`}>
+                  {t('header.trade')}
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/pricing" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Pricing</Link>
-              </li>
+              </li> */}
               <li>
-                <Link to="/blog" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">Blog</Link>
+                <Link to="/trade-pool" className={`text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out ${props.current == 'trade_pool' && 'cursor-default text-purple-700 hover:text-purple-800'}`}>
+                {t('header.cap_pool')}
+                </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/about" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">About us</Link>
-              </li>
+              </li> */}
               {/* 1st level: hover */}
-              <Dropdown title="Support">
-                {/* 2nd level: hover */}
-                <li>
-                  <Link to="/contact" className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight">Contact us</Link>
+              <Dropdown title={(t("header.language"))}>
+                <li onClick={() => {
+                  i18next.changeLanguage('cht')
+                }}>
+                  <div className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight cursor-pointer" >
+                    <img src={CN} alt="" className='w-4 mr-2' />
+                    中文
+                  </div>
                 </li>
-                <li>
-                  <Link to="/help" className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight">Help center</Link>
+                <li onClick={() => {
+                  i18next.changeLanguage('en')
+                }}>
+                  <div className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight cursor-pointer">
+                    <img src={GB} alt="" className='w-4 mr-2' />
+                    English
+                  </div>
                 </li>
-                <li>
-                  <Link to="/404" className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight">404</Link>
+                <li onClick={() => {
+                  i18next.changeLanguage('cht')
+                }}>
+                  <div className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight cursor-pointer">
+                    <img src={HK} alt="" className='w-4 mr-2' />
+                    中文繁體
+                  </div>
                 </li>
+                <li onClick={() => {
+                  i18next.changeLanguage('en')
+                }}>
+                  <div className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight cursor-pointer">
+                    <img src={JP} alt="" className='w-4 mr-2' />
+                    日本
+                  </div>
+                </li>
+                
               </Dropdown>
             </ul>
 
@@ -157,69 +190,112 @@ function AppHeader() {
 
           </nav>
 
-          {/* Mobile menu */}
-          <div className="md:hidden">
-
-            {/* Hamburger button */}
-            <button ref={trigger} className={`hamburger ${mobileNavOpen && 'active'}`} aria-controls="mobile-nav" aria-expanded={mobileNavOpen} onClick={() => setMobileNavOpen(!mobileNavOpen)}>
-              <span className="sr-only">Menu</span>
-              <svg className="w-6 h-6 fill-current text-gray-300 hover:text-gray-200 transition duration-150 ease-in-out" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <rect y="4" width="24" height="2" rx="1" />
-                <rect y="11" width="24" height="2" rx="1" />
-                <rect y="18" width="24" height="2" rx="1" />
-              </svg>
-            </button>
-
-            {/*Mobile navigation */}
-            <nav id="mobile-nav" ref={mobileNav} className="absolute top-full z-20 left-0 w-full px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out" style={mobileNavOpen ? { maxHeight: mobileNav.current.scrollHeight, opacity: 1 } : { maxHeight: 0, opacity: .8 } }>
-              <ul className="bg-gray-800 px-4 py-2">
-                <li>
-                  <Link to="/features" className="flex text-gray-300 hover:text-gray-200 py-2">Features</Link>
-                </li>
-                <li>
-                  <Link to="/pricing" className="flex text-gray-300 hover:text-gray-200 py-2">Pricing</Link>
-                </li>
-                <li>
-                  <Link to="/blog" className="flex text-gray-300 hover:text-gray-200 py-2">Blog</Link>
-                </li>
-                <li>
-                  <Link to="/about" className="flex text-gray-300 hover:text-gray-200 py-2">About us</Link>
-                </li>
-                <li className="py-2 my-2 border-t border-b border-gray-700">
-                  <span className="flex text-gray-300 py-2">Support</span>
-                  <ul className="pl-4">
-                    <li>
-                      <Link to="/contact" className="text-sm flex font-medium text-gray-400 hover:text-gray-200 py-2">Contact us</Link>
+          <div className='flex flex-nowarp md:hidden'>
+            {/* Mobile language */}
+            <nav  >
+              <ul>
+                <Dropdown title={(t("header.language"))}>
+                    <li onClick={() => {
+                      i18next.changeLanguage('cht')
+                    }}>
+                      <div className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight cursor-pointer" >
+                        <img src={CN} alt="" className='w-4 mr-2' />
+                        中文
+                      </div>
                     </li>
-                    <li>
-                      <Link to="/help" className="text-sm flex font-medium text-gray-400 hover:text-gray-200 py-2">Help center</Link>
+                    <li onClick={() => {
+                      i18next.changeLanguage('en')
+                    }}>
+                      <div className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight cursor-pointer">
+                        <img src={GB} alt="" className='w-4 mr-2' />
+                        English
+                      </div>
                     </li>
-                    <li>
-                      <Link to="/404" className="text-sm flex font-medium text-gray-400 hover:text-gray-200 py-2">404</Link>
+                    <li onClick={() => {
+                      i18next.changeLanguage('cht')
+                    }}>
+                      <div className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight cursor-pointer">
+                        <img src={HK} alt="" className='w-4 mr-2' />
+                        中文繁體
+                      </div>
                     </li>
-                  </ul>
-                </li>
-                {/* <li>
-                  <Link to="/signin" className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center">Sign in</Link>
-                </li> */}
-                <li>
-                  {
-                    !active ? (<button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConnectModalOpen(true); }}  className="font-medium w-full inline-flex items-center justify-center border border-purple-600 hover:border-purple-700 px-4 py-2 my-2 rounded-sm text-purple-600 bg-transparent  transition duration-150 ease-in-out">
-                      {t('Connect wallet')}
-                    </button>):
-                    (
-                      <button onClick={(e)=>{e.preventDefault(); e.stopPropagation();setWalletModalOpen(true)}} className='font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out'>
-                        {
-                          truncateAddress(account)
-                        }
-                      </button>
-                    )
-                  }
-                  
-                </li>
+                    <li onClick={() => {
+                      i18next.changeLanguage('en')
+                    }}>
+                      <div className="font-medium text-sm text-gray-400 hover:text-purple-600 flex py-2 px-4 leading-tight cursor-pointer">
+                        <img src={JP} alt="" className='w-4 mr-2' />
+                        日本
+                      </div>
+                    </li>
+                    
+                </Dropdown>
               </ul>
+            
             </nav>
+            {/* Mobile menu */}
+            <div >
 
+              {/* Hamburger button */}
+              
+              <button ref={trigger} className={`my-2 hamburger ${mobileNavOpen && 'active'}`} aria-controls="mobile-nav" aria-expanded={mobileNavOpen} onClick={() => setMobileNavOpen(!mobileNavOpen)}>
+                <span className="sr-only">Menu</span>
+                <svg className="w-6 h-6 fill-current text-gray-300 hover:text-gray-200 transition duration-150 ease-in-out" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <rect y="4" width="24" height="2" rx="1" />
+                  <rect y="11" width="24" height="2" rx="1" />
+                  <rect y="18" width="24" height="2" rx="1" />
+                </svg>
+              </button>
+
+              {/*Mobile navigation */}
+              <nav id="mobile-nav" ref={mobileNav} className="absolute top-full z-20 left-0 w-full px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out" style={mobileNavOpen ? { maxHeight: mobileNav.current.scrollHeight, opacity: 1 } : { maxHeight: 0, opacity: .8 } }>
+                <ul className="bg-gray-800 px-4 py-2 space-y-2">
+                  <li className={props.current == 'trade'?' bg-purple-600':''}>
+                    <Link to="/trade" className="flex text-gray-300 hover:text-gray-200 py-2 ml-2">{t('header.trade')}</Link>
+                  </li>
+                  <li className={props.current == 'trade_pool'?' bg-purple-600':''}>
+                    <Link to="/trade-pool" className="flex text-gray-300 hover:text-gray-200 py-2  ml-2">{t('header.cap_pool')}</Link>
+                  </li>
+                  {/* <li>
+                    <Link to="/blog" className="flex text-gray-300 hover:text-gray-200 py-2">Blog</Link>
+                  </li>
+                  <li>
+                    <Link to="/about" className="flex text-gray-300 hover:text-gray-200 py-2">About us</Link>
+                  </li>
+                  <li className="py-2 my-2 border-t border-b border-gray-700">
+                    <span className="flex text-gray-300 py-2">Support</span>
+                    <ul className="pl-4">
+                      <li>
+                        <Link to="/contact" className="text-sm flex font-medium text-gray-400 hover:text-gray-200 py-2">Contact us</Link>
+                      </li>
+                      <li>
+                        <Link to="/help" className="text-sm flex font-medium text-gray-400 hover:text-gray-200 py-2">Help center</Link>
+                      </li>
+                      <li>
+                        <Link to="/404" className="text-sm flex font-medium text-gray-400 hover:text-gray-200 py-2">404</Link>
+                      </li>
+                    </ul>
+                  </li> */}
+                  {/* <li>
+                    <Link to="/signin" className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center">Sign in</Link>
+                  </li> */}
+                  <li>
+                    {
+                      !active ? (<button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConnectModalOpen(true); }}  className="font-medium w-full inline-flex items-center justify-center border border-purple-600 hover:border-purple-700 px-4 py-2 my-2 rounded-sm text-purple-600 bg-transparent  transition duration-150 ease-in-out">
+                        {t('Connect wallet')}
+                      </button>):
+                      (
+                        <button onClick={(e)=>{e.preventDefault(); e.stopPropagation();setWalletModalOpen(true)}} className='font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out'>
+                          {
+                            truncateAddress(account)
+                          }
+                        </button>
+                      )
+                    }
+                  </li>
+                </ul>
+              </nav>
+
+            </div>
           </div>
 
         </div>

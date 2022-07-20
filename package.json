@@ -13,15 +13,22 @@
     "@web3-react/walletconnect-connector": "6.2.13",
     "@web3-react/walletlink-connector": "6.2.13",
     "aos": "^3.0.0-beta.6",
+    "axios": "^0.27.2",
     "ethers": "5.5.4",
     "i18next": "^21.8.14",
+    "js-cookie": "^3.0.1",
+    "jsencrypt": "^3.2.1",
+    "klinecharts": "^8.6.1",
+    "moment": "^2.29.4",
+    "qs": "^6.11.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-flatpickr": "^3.10.7",
     "react-hot-toast": "^2.3.0",
     "react-i18next": "^11.18.1",
     "react-router-dom": "^6.2.1",
-    "react-transition-group": "^4.4.1"
+    "react-transition-group": "^4.4.1",
+    "react-use-websocket": "^4.2.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",

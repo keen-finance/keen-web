@@ -3,8 +3,11 @@ import Least from '../images/least.svg';
 import Haechi from '../images/haechi.svg';
 import Peck from '../images/peck.svg';
 import Certik from '../images/certik.svg';
+import { useTranslation } from 'react-i18next';
 
 function Audited() {
+  const { t, i18n } = useTranslation();
+
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 ">
@@ -12,7 +15,7 @@ function Audited() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h2 mb-4">审核人</h1>
+            <h1 className="h2 mb-4">{t('home.audited.title')}</h1>
             <p className="text-xl text-gray-400"></p>
           </div>
 

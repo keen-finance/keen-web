@@ -10,8 +10,8 @@ function Process() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
-            <h2 className="h2 mb-4" data-aos="fade-up">{t('Step Title')}</h2>
-            <p className="text-xl text-gray-400" data-aos="fade-up" data-aos-delay="200">{t('Step SubTitle')}</p>
+            <h2 className="h2 mb-4" data-aos="fade-up">{t('home.process.title')}</h2>
+            <p className="text-xl text-gray-400" data-aos="fade-up" data-aos-delay="200">{t('home.process.sub_title')}</p>
           </div>
 
           {/* Items */}
@@ -27,8 +27,8 @@ function Process() {
               </div>
               
               
-              <h4 className="h4 mb-2"><span className="text-gray-400">1</span>. {t('Step One Title')}</h4>
-              <p className="text-lg text-gray-400 text-center">{t('Step One SubTitle')}</p>
+              <h4 className="h4 mb-2"><span className="text-gray-400">1</span>. {t('home.process.step.one.title')}</h4>
+              <p className="text-lg text-gray-400 text-center">{t('home.process.step.one.sub_title')}</p>
             </div>
 
             {/* 2nd item */}
@@ -40,8 +40,8 @@ function Process() {
                   <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" />
                 </svg>
               </div>
-              <h4 className="h4 mb-2"><span className="text-gray-400">2</span>. {t('Step Two Title')}</h4>
-              <p className="text-lg text-gray-400 text-center">{t('Step Two SubTitle')}</p>
+              <h4 className="h4 mb-2"><span className="text-gray-400">2</span>. {t('home.process.step.two.title')}</h4>
+              <p className="text-lg text-gray-400 text-center">{t('home.process.step.two.sub_title')}</p>
             </div>
 
             {/* 3rd item */}
@@ -51,8 +51,8 @@ function Process() {
                   <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
                 </svg>
               </div>
-              <h4 className="h4 mb-2"><span className="text-gray-400">3</span>. {t('Step Three Title')}</h4>
-              <p className="text-lg text-gray-400 text-center">{t('Step Three SubTitle')}</p>
+              <h4 className="h4 mb-2"><span className="text-gray-400">3</span>. {t('home.process.step.three.title')}</h4>
+              <p className="text-lg text-gray-400 text-center">{t('home.process.step.three.sub_title')}</p>
             </div>
 
           </div>

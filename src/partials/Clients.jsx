@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 function Clients() {
+  const { t, i18n } = useTranslation();
+
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 ">
@@ -8,7 +11,7 @@ function Clients() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h2 mb-4">受到最好企业的信任</h1>
+            <h1 className="h2 mb-4">{t('home.clients.title')}</h1>
             <p className="text-xl text-gray-400"></p>
           </div>
 

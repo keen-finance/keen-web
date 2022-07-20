@@ -11,7 +11,7 @@ import ModalBasic from '../utils/ModalBasic';
 function HeroWord() {
   const { t, i18n } = useTranslation();
   const [basicModalOpen, setBasicModalOpen] = useState(false);
-  const [basicModalType, setBasicModalContent] = useState("China"|"Philippines"|"Russia");
+  const [basicModalType, setBasicModalContent] = useState("china"|"philippines"|"russia");
   return (
     <section>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -19,8 +19,8 @@ function HeroWord() {
 
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h2 mb-4">{t('Hero World Title')}</h1>
-            <p className="text-xl text-gray-600">{t('Hero World Sub Title')}</p>
+            <h1 className="h2 mb-4">{t("home.world.title")}</h1>
+            <p className="text-xl text-gray-600">{t("home.world.sub_title")}</p>
           </div>
 
           {/* World illustration */}
@@ -96,31 +96,31 @@ function HeroWord() {
               <div className="absolute max-w-full transform animate-float w-1/6" style={{  top: '90.5%', left: '6.8%' }} >
                 
                 <img  src={Avatar01} className="w-10 rounded-full" alt="Planet avatar 03"  />
-                <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-5 left-5 h-6 w-6 text-red-700 animate-pulse transition duration-75  flex md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" onClick={(e) => { e.preventDefault(); e.stopPropagation();setBasicModalContent("Philippines"); setBasicModalOpen(true) }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-5 left-5 h-6 w-6 text-red-700 animate-pulse transition duration-75  flex md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" onClick={(e) => { e.preventDefault(); e.stopPropagation();setBasicModalContent("philippines"); setBasicModalOpen(true) }}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
                 <span className='inline-flex text-left text-gray-100 py-1 px-3 rounded-full bg-red-600 hover:bg-red-700 transition duration-150 ease-in-out -ml-48 hidden md:flex'>
-                {t("Philippines Title")+t("Philippines Content")}
+                {t("home.world.feedback.philippines.title")+t("home.world.feedback.philippines.content")}
                 </span>
               </div>
               {/* Avatars 中国*/}
               <div className="absolute max-w-full transform animate-float w-full" style={{  top: '60.5%', left: '60.8%' }}>
                 
                 <img  src={Avatar02} className="w-10 rounded-full" alt="Planet avatar 03" />
-                <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-5 left-5 h-6 w-6 text-purple-700 animate-pulse   flex md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" onClick={(e) => { e.preventDefault(); e.stopPropagation();setBasicModalContent("China"); setBasicModalOpen(true) }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-5 left-5 h-6 w-6 text-purple-700 animate-pulse   flex md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" onClick={(e) => { e.preventDefault(); e.stopPropagation();setBasicModalContent("china"); setBasicModalOpen(true) }}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
                 <span className='inline-flex text-left text-gray-100 py-1 px-3 rounded-full bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out  hidden md:flex'>
-                {t("China Title")+t("China Content")}
+                {t("home.world.feedback.china.title")+t("home.world.feedback.china.content")}
                 </span>
               </div>
               {/* Avatars 俄罗斯*/}
               <div className="absolute max-w-full transform animate-float w-full" style={{  top: '10.5%', left: '70.8%' }}>
                 <span className='inline-flex text-left text-gray-100 py-1 px-3 rounded-full bg-green-600 hover:bg-green-700 transition duration-150 ease-in-out  hidden md:flex'>
-                {t("Russia Title")+t("Russia Content")}
+                {t("home.world.feedback.russia.title")+t("home.world.feedback.russia.content")}
                 </span>
                 <img  src={Avatar03} className="w-10 rounded-full" alt="Planet avatar 03" />
-                <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-5 left-5 h-6 w-6 text-green-700 animate-pulse transition duration-75  flex md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" onClick={(e) => { e.preventDefault(); e.stopPropagation();setBasicModalContent("Russia"); setBasicModalOpen(true) }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="absolute -top-5 left-5 h-6 w-6 text-green-700 animate-pulse transition duration-75  flex md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" onClick={(e) => { e.preventDefault(); e.stopPropagation();setBasicModalContent("russia"); setBasicModalOpen(true) }}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
               </div>
@@ -131,13 +131,13 @@ function HeroWord() {
           
 
         </div>
-        <ModalBasic id="basic-modal" modalOpen={basicModalOpen} setModalOpen={setBasicModalOpen} title={t(basicModalType+" Title")}>
+        <ModalBasic id="basic-modal" modalOpen={basicModalOpen} setModalOpen={setBasicModalOpen} title={t("home.world.feedback."+basicModalType+".title")}>
           {/* Modal content */}
           <div className="px-5 pt-4 pb-1">
             <div className="text-sm">
               <div className="font-medium text-slate-800 mb-2"></div>
               <div className="space-y-2">
-                <p>{t(basicModalType+" Content")}</p>
+                <p>{t("home.world.feedback."+basicModalType+".content")}</p>
               </div>
             </div>
           </div>
