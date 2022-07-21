@@ -65,7 +65,8 @@ typings/
 .next
 
 # Built files
-dist
+dist*
+dist.zip
 
 
 .vscode
