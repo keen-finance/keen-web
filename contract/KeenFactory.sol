@@ -480,7 +480,7 @@ contract KeenFactory is IKeenFactory {
         return allPairs.length;
     }
 
-    function createPair(address tokenA, address tokenB) external returns (address pair) {
+    function createPair(address tokenA,address replaceTokenA, address tokenB,address replaceTokenB) external returns (address pair) {
         require(tokenA != tokenB, 'Keen: IDENTICAL_ADDRESSES');
         (address token0, address token1) = tokenA < tokenB ? (tokenA, tokenB) : (tokenB, tokenA);
         require(token0 != address(0), 'Keen: ZERO_ADDRESS');
