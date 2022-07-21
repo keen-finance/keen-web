@@ -10,6 +10,7 @@ import generatedKLineDataList from '../utils/generatedKLineDataList'
 
 import { init, dispose } from 'klinecharts'
 import BetResult from '../partials/BetResult';
+import { useWeb3React } from "@web3-react/core";
 
 const textColorDark = '#ffff'
 const gridColorDark = '#3a3a3acc'
@@ -85,7 +86,7 @@ function getThemeOptions (theme) {
           // paddingTop: 10,
           // paddingBottom: 6,
           offsetLeft: 1,
-          offsetTop: 40,
+          offsetTop: 50,
           offsetRight: 0,
           borderRadius: 4,
           borderSize: 1,
@@ -178,9 +179,27 @@ const themes = [
 
 
 function Trade() {
-  const [token, setToken] = useState('empty');
+  const {
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error
+  } = useWeb3React();
 
-  const webSocket = useWebSocket(Config[Config.NODE_ENV].VUE_APP_SOCKET_API+'/webSocket/'+token,{},true);
+  const [webSocketUrl,setWebSocketUrl] = useState();
+  useEffect(() => {
+    console.log("122323",account)
+    if(account){
+      setWebSocketUrl(Config[Config.NODE_ENV].VUE_APP_SOCKET_API+'/webSocket/'+account)
+    }else{
+      setWebSocketUrl(Config[Config.NODE_ENV].VUE_APP_SOCKET_API+'/webSocket/tourists')
+    }
+  },[account]);
+  
+  const webSocket = useWebSocket(webSocketUrl,{},true);
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
 
@@ -200,6 +219,21 @@ function Trade() {
   // 订单
   const [orderTabIndex, setOrderTabIndex] = useState(0)
  
+  function uuid() {
+    var s = [];
+    var hexDigits = "0123456789abcdef";
+    for (var i = 0; i < 36; i++) {
+        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+    }
+    s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+    s[8] = s[13] = s[18] = s[23] = "-";
+
+    var uuid = s.join("");
+    return uuid;
+}
+
+
   const resizeUpdate = (e) => {
       // 通过事件对象获取浏览器窗口的高度
       let h = e.target.innerHeight;
@@ -223,21 +257,23 @@ function Trade() {
 
 
   useEffect(() => {
-    chart.current = init('custom-style-k-line')    
+    
+    let current = init('custom-style-k-line')    
     // paneId.current = chart.current.createTechnicalIndicator('VOL', false,{ 'dragEnbaled':false})
-    chart.current.setZoomEnabled(false)
-    chart.current.setScrollEnabled(false)
-    chart.current.setDataSpace(15)
-    chart.current.setOffsetRightSpace(0);
+    current.setZoomEnabled(false)
+    current.setScrollEnabled(false)
+    current.setDataSpace(15)
+    current.setOffsetRightSpace(0);
 
     generatedKLineDataList().then(data => {
       let list = data.content;
       for (let index = 0; index < list.length; index++) {
         list[index].timestamp = list[index].id
       }
-      chart.current.applyNewData(list.reverse())
+      current.applyNewData(list.reverse())
       setCircleInitData(list.reverse())
     })
+    chart.current = current
     return () => {
       dispose('custom-style-k-line')
     }
@@ -266,11 +302,10 @@ function Trade() {
   },[webSocket.lastJsonMessage,chart.current])
 
   useEffect(() =>{
-    console.log(webSocket.readyState)
-    if(webSocket.readyState !== ReadyState.OPEN){
+    if(webSocket.readyState == ReadyState.OPEN && chart.current){
       webSocket.sendMessage('kline')
     }
-  },[webSocket.readyState])
+  },[webSocket.readyState,chart.current])
 
   useEffect(() => {
     chart.current.setStyleOptions(getThemeOptions(theme))
@@ -289,16 +324,16 @@ function Trade() {
         <div className="relative max-w-7xl mx-auto h-0 pointer-events-none" aria-hidden="true">
           <PageIllustration />
         </div>
-        <div className="max-w-6xl mx-auto px-0 sm:px-0  flex md:w-5/6">
-          <div className='relative pt-16 h-screen'>
-            <div className="btn bg-slate-800  text-white absolute top-16 lg:left-1 z-10 font-bold  ">
+        <div className="max-w-7xl mx-auto px-0 sm:px-0  flex flex-row h-screen  pt-16">
+          <div className='relative w-full border border-gray-700'>
+            <div className="btn bg-black/20  border border-gray-700  text-white absolute  z-10 font-bold  ">
               BTC/USD
             </div>
             {/* Content */}
-            <div className="h-full w-5/6">
+            <div className="h-full w-full">
               {/* kline top */}
               <div className='h-3/5 lg:h-2/3 sm:h-3/5'>
-                <div  id="custom-style-k-line" className="k-line-chart  bg-no-repeat bg-cover h-full " >
+                <div  id="custom-style-k-line" className="k-line-chart  bg-no-repeat bg-cover h-full bg-cover bg-center bg-[url('/src/images/worldmap.png')]" >
                 </div>
               </div>
               {/* kline bottom */}
@@ -377,7 +412,7 @@ function Trade() {
 
             {/* desktop right */}
             
-            <div className=" lg:shrink-0 h-screen pt-16 hidden md:flex">
+            <div className=" lg:shrink-0 h-screen pt-18 hidden md:flex">
               <div className="py-8 px-4 lg:px-8 border h-full border-gray-700 overflow-y-auto" >
                 <div className="max-w-sm mx-auto lg:max-w-none ">
                   {/* Credit Card */}
@@ -436,7 +471,7 @@ function Trade() {
                   <div className="mt-6 ">
                     <div className="text-sm font-semibold text-white mb-4 text-center">做个交易吧！</div>
                     <div className='flex flex-nowrap pb-4 border-b border-gray-700'>
-                      <button className="btn-lg bg-teal-500 hover:bg-red-600 text-white text-2xl w-1/3 h-16 flex text-center justify-center">
+                      <button className="btn-lg bg-teal-500 hover:bg-teal-600 text-white text-2xl w-1/3 h-16 flex text-center justify-center">
                         <div className='flex my-auto'>
                           买
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

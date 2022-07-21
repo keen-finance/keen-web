@@ -129,11 +129,12 @@ function BetResult(props) {
     setCircleResult(oldArray => [...oldArray, item])
   } 
   return (
-    <section>
+    <>
+      
+      <div className="h-2/6">
       <header className=" border-b border-gray-700 lg:16 lg:my-5 lg:mx-5 ">
         <span className="font-semibold text-white">投注结果</span>
       </header>
-      <div className="h-2/6">
         <div className='flex justify-between mx-2 mt-1'>
           {
               circleResult.map((item, index) => {
@@ -179,7 +180,7 @@ function BetResult(props) {
         </div>
         
       </div>
-    </section>
+    </>
   );
 }
 
