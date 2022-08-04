@@ -93,6 +93,7 @@ function AppHeader(props) {
   };
 
   useEffect(() => {
+    
     const provider = window.localStorage.getItem("provider");
     if (provider) activate(connectors[provider]);
   }, []);
@@ -143,7 +144,12 @@ function AppHeader(props) {
                 <Link to="/about" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">About us</Link>
               </li> */}
               {/* 1st level: hover */}
-              <Dropdown title={(t("header.language"))}>
+              
+            </ul>
+
+            {/* Desktop sign in links */}
+            <ul className="flex grow justify-end flex-wrap items-center">
+            <Dropdown title={(t("header.language"))}>
                 <li onClick={() => {
                   i18next.changeLanguage('cht')
                 }}>
@@ -178,10 +184,6 @@ function AppHeader(props) {
                 </li>
                 
               </Dropdown>
-            </ul>
-
-            {/* Desktop sign in links */}
-            <ul className="flex grow justify-end flex-wrap items-center">
               <li >
                 {
                   !active ? (<button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConnectModalOpen(true); }}  className="font-medium w-full inline-flex items-center justify-center border border-purple-600 hover:border-purple-700 px-4 py-1 my-2 rounded-sm text-purple-600 bg-transparent  transition duration-150 ease-in-out">
@@ -355,7 +357,7 @@ function AppHeader(props) {
         </div>
       </div>
       
-      <ModalBasic id="connectModal" modalOpen={connectModalOpen} setModalOpen={setConnectModalOpen} title={t('Connect wallet')}>
+      <ModalBasic id="connectModal" modalOpen={connectModalOpen} setModalOpen={setConnectModalOpen} title={t('header.connect_wallet')}>
         {/* Modal content */}
         <div className="px-5 pt-4 pb-4 space-y-4 ">
           <button className="btn border-slate-200 hover:border-slate-300 text-white w-full  flex justify-between px-16" onClick={() => {

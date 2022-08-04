@@ -82,10 +82,10 @@ function Header() {
     return `${match[1]}...${match[2]}`;
   };
 
-  useEffect(() => {
-    const provider = window.localStorage.getItem("provider");
-    if (provider) activate(connectors[provider]);
-  }, []);
+  // useEffect(() => {
+  //   const provider = window.localStorage.getItem("provider");
+  //   if (provider) activate(connectors[provider]);
+  // }, []);
 
   const refreshState = () => {
     window.localStorage.setItem("provider", undefined);
@@ -133,6 +133,11 @@ function Header() {
                 <Link to="/about" className="text-gray-300 hover:text-gray-200 px-4 py-2 flex items-center transition duration-150 ease-in-out">About us</Link>
               </li> */}
               {/* 1st level: hover */}
+ 
+            </ul>
+
+            {/* Desktop sign in links */}
+            <ul className="flex grow justify-end flex-wrap items-center">
               <Dropdown title={(t("header.language"))}>
                 <li onClick={() => {
                   i18next.changeLanguage('cht')
@@ -168,10 +173,6 @@ function Header() {
                 </li>
                 
               </Dropdown>
-            </ul>
-
-            {/* Desktop sign in links */}
-            <ul className="flex grow justify-end flex-wrap items-center">
               <li >
                 <Link to="/trade" className="font-medium w-full inline-flex items-center justify-center border border-purple-600 hover:border-purple-700 px-4 py-2 my-2 rounded-sm text-purple-600 bg-transparent  transition duration-150 ease-in-out">
                 {t("header.open_app")}

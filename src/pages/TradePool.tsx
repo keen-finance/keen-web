@@ -2,12 +2,8 @@ import React from 'react';
 
 import AppHeader from '../partials/AppHeader';
 import PageIllustration from '../partials/PageIllustration';
-import HeroFeatures from '../partials/HeroFeatures';
-import Stats from '../partials/Stats';
-import FeaturesZigzag from '../partials/FeaturesZigzag';
-import FeaturesBlocks from '../partials/FeaturesBlocks';
-import CaseStudies from '../partials/CaseStudies';
-import Cta from '../partials/Cta';
+import PoolInfo from '../partials/PoolInfo';
+
 import Footer from '../partials/Footer';
 
 function TradePool() {
@@ -26,12 +22,7 @@ function TradePool() {
         </div>
 
         {/*  Page sections */}
-        <HeroFeatures />
-        <Stats />
-        <FeaturesZigzag />
-        <FeaturesBlocks />
-        <CaseStudies />
-        <Cta />
+        <PoolInfo/>
 
       </main>
 
