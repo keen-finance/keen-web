@@ -10,7 +10,7 @@ function Dropdown({
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <li
+    <div
       className="relative"
       onMouseEnter={() => setDropdownOpen(true)}
       onMouseLeave={() => setDropdownOpen(false)}
@@ -45,7 +45,7 @@ function Dropdown({
       >
         {children}
       </Transition>
-    </li>
+    </div>
   );
 }
 

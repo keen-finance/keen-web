@@ -2,14 +2,14 @@ import React,{ useState, useRef, useEffect } from 'react';
 
 import AppHeader from '../partials/AppHeader';
 import PageIllustration from '../partials/PageIllustration';
+import BetResult from '../partials/BetResult';
 
 import Footer from '../partials/Footer';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import Config from '../settings'
 import generatedKLineDataList from '../utils/generatedKLineDataList'
-
 import { init, dispose } from 'klinecharts'
-import BetResult from '../partials/BetResult';
+
 import { useWeb3React } from "@web3-react/core";
 
 const textColorDark = '#ffff'
@@ -206,7 +206,7 @@ function Trade() {
 
   const websocket = useRef()
 
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState('dark')
 
   const [height, setHeight] = useState(0); 
 
@@ -262,6 +262,7 @@ function Trade() {
     current.setScrollEnabled(false)
     current.setDataSpace(15)
     current.setOffsetRightSpace(0);
+    current.setStyleOptions(getThemeOptions(theme))
 
     generatedKLineDataList().then(data => {
       let list = data.content;
@@ -305,9 +306,7 @@ function Trade() {
     }
   },[webSocket.readyState,chart.current])
 
-  useEffect(() => {
-    chart.current.setStyleOptions(getThemeOptions(theme))
-  }, [theme])
+
 
   return (
     <div className="flex flex-col min-h-screen max-h-screen lg:max-h-full overflow-hidden">
