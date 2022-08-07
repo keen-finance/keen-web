@@ -2,11 +2,11 @@ import React from 'react';
 
 import AppHeader from '../partials/AppHeader';
 import PageIllustration from '../partials/PageIllustration';
-import PoolInfo from '../partials/poolInfo/PoolInfo';
+import PoolInfoAdd from '../partials/poolInfo/PoolInfoAdd';
 
 import Footer from '../partials/Footer';
 
-function TradePool() {
+function TradePoolAdd() {
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 
@@ -22,7 +22,7 @@ function TradePool() {
         </div>
 
         {/*  Page sections */}
-        <PoolInfo/>
+        <PoolInfoAdd/>
 
       </main>
 
@@ -33,4 +33,4 @@ function TradePool() {
   );
 }
 
-export default TradePool;
+export default TradePoolAdd;

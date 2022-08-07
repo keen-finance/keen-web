@@ -149,7 +149,7 @@ function AppHeader(props) {
 
             {/* Desktop sign in links */}
             <ul className="flex grow justify-end flex-wrap items-center">
-            <Dropdown title={(t("header.language"))}>
+            <Dropdown title={''} icon='language'>
                 <li onClick={() => {
                   i18next.changeLanguage('cht')
                 }}>
@@ -220,7 +220,7 @@ function AppHeader(props) {
 
               <ul className="flex grow justify-end flex-wrap items-center">
                 
-                <Dropdown title={(t("header.language"))}>
+                <Dropdown title={''} icon='language'>
                     <li onClick={() => {
                       i18next.changeLanguage('cht')
                     }}>

@@ -1,10 +1,10 @@
 import React,{ useState, useRef, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import Config from '../settings'
-import generatedKLineDataList from '../utils/generatedKLineDataList'
+import Config from '../../settings'
+import generatedKLineDataList from '../../utils/generatedKLineDataList'
 import { init, dispose } from 'klinecharts'
+
 import { useWeb3React } from "@web3-react/core";
-import useWindowSize from '../utils/useWindowSize'
 
 const textColorDark = '#ffff'
 const gridColorDark = '#3a3a3acc'
@@ -35,7 +35,6 @@ function getThemeOptions (theme) {
       }
     },
     candle: {
-      show:false,
       priceMark: {
         show:false,
         high: {
@@ -109,29 +108,23 @@ function getThemeOptions (theme) {
       type:'area',
       // 面积图
       area: {
-        lineSize: 0,
-        lineColor: 'rgba(33, 150, 243, 0)',
+        lineSize: 2,
+        lineColor: '#2196F3',
         value: 'close',
         backgroundColor: [{
           offset: 0,
-          color: 'rgba(33, 150, 243, 0)'
+          color: 'rgba(33, 150, 243, 0.01)'
         }, {
           offset: 1,
-          color: 'rgba(33, 150, 243, 0)'
+          color: 'rgba(33, 150, 243, 0.2)'
         }]
       },
     },
     technicalIndicator: {
       tooltip: {
-        showRule: 'none'
-      },
-      bar: {
-        upColor: 'rgb(147 51 234)',
-        downColor: 'rgb(147 51 234)',
-        noChangeColor: 'rgb(147 51 234)'
-      },
-      line: {
-        size: 0
+        text: {
+          color: textColor
+        }
       }
     },
     xAxis: {
@@ -149,7 +142,7 @@ function getThemeOptions (theme) {
       }
     },
     yAxis: {
-      width: 60,
+      width: 120,
       axisLine: {
         show:false,
         color: axisLineColor,
@@ -169,9 +162,9 @@ function getThemeOptions (theme) {
       }
     },
     separator: {
-      size: 0,
+      size: 1,
       color: axisLineColor,
-      fill: true,
+      fill: false,
       activeBackgroundColor: 'rgba(230, 230, 230, .15)'
     },
     crosshair: {
@@ -201,7 +194,7 @@ const themes = [
   { key: 'light', text: '浅色' }
 ]
 
-function AnalyticsVolume() {
+function AnalyticsLiquidity() {
   const {
     library,
     chainId,
@@ -214,6 +207,7 @@ function AnalyticsVolume() {
 
   const [webSocketUrl,setWebSocketUrl] = useState(Config[Config.NODE_ENV].VUE_APP_SOCKET_API+'/webSocket/tourists');
   useEffect(() => {
+    console.log("122323",account)
     if(account){
       setWebSocketUrl(Config[Config.NODE_ENV].VUE_APP_SOCKET_API+'/webSocket/'+account)
     }
@@ -221,7 +215,7 @@ function AnalyticsVolume() {
   
   const webSocket = useWebSocket(webSocketUrl,{},true);
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const { width, height } = useWindowSize()
+
 
   const chart = useRef()
   const paneId = useRef()
@@ -230,6 +224,7 @@ function AnalyticsVolume() {
 
   const [theme, setTheme] = useState('dark')
 
+  const [height, setHeight] = useState(0); 
 
   const [circleInitData, setCircleInitData] = useState([])
   const [circlelastData, setCircleLastData] = useState()
@@ -253,25 +248,32 @@ function AnalyticsVolume() {
 }
 
 
-  // const resizeUpdate = (e) => {
-  //     // 通过事件对象获取浏览器窗口的高度
-  //     let h = e.target.innerHeight;
-  //     chart.current.resize();
-  // }
+  const resizeUpdate = (e) => {
+      // 通过事件对象获取浏览器窗口的高度
+      let h = e.target.innerHeight;
+      setHeight(h);
+      chart.current.resize();
+  }
 
+  useEffect(() => {
+    // 页面刚加载完成后获取浏览器窗口的大小
+    let h = window.innerHeight;
+    setHeight(h)
+
+    // 页面变化时获取浏览器窗口的大小 
+    window.addEventListener('resize', resizeUpdate);
+
+    return () => {
+        // 组件销毁时移除监听事件
+        window.removeEventListener('resize', resizeUpdate);
+    }
+  }, []);
 
 
   useEffect(() => {
-    if(width == 0){
-      return;
-    }
-    let current = init('custom-style-k-line')
-    chart.current = current
-    let height = 360
-    if(width >= 670){
-      height = 600
-    }
-    paneId.current = current.createTechnicalIndicator('VOL', true,{ dragEnabled:false,height:height})
+    
+    let current = init('custom-style-k-line')    
+    // paneId.current = chart.current.createTechnicalIndicator('VOL', false,{ 'dragEnbaled':false})
     current.setZoomEnabled(false)
     current.setScrollEnabled(false)
     current.setOffsetRightSpace(0);
@@ -284,10 +286,11 @@ function AnalyticsVolume() {
       current.applyNewData(list.reverse())
       setCircleInitData(list.reverse())
     })
+    chart.current = current
     return () => {
       dispose('custom-style-k-line')
     }
-  }, [width])
+  }, [])
 
   useEffect(() =>{
     if(!webSocket.lastJsonMessage){
@@ -316,13 +319,15 @@ function AnalyticsVolume() {
       webSocket.sendMessage('kline')
     }
   },[webSocket.readyState,chart.current])
-
+  useEffect(() => {
+    chart.current.setStyleOptions(getThemeOptions(theme))
+  }, [theme])
   return (
     <div className="flex flex-col col-span-full xl:col-span-8 h-full w-full">
-      <div  id="custom-style-k-line" className="k-line-chart  bg-no-repeat bg-cover bg-cover bg-center " >
+      <div  id="custom-style-k-line" className="k-line-chart  bg-no-repeat bg-cover h-full bg-cover bg-center " >
       </div>
     </div>
   );
 }
 
-export default AnalyticsVolume;
+export default AnalyticsLiquidity;

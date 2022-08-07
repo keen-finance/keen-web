@@ -23,6 +23,7 @@ import ResetPassword from './pages/ResetPassword';
 import PageNotFound from './pages/PageNotFound';
 import Trade from './pages/Trade';
 import TradePool from './pages/TradePool';
+import TradePoolAdd from './pages/TradePoolAdd';
 function App() {
 
   const location = useLocation();
@@ -48,6 +49,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/trade" element={<Trade />} />
         <Route path="/trade-pool" element={<TradePool />} />
+        <Route path="/add" element={<TradePoolAdd />} />
         
         <Route path="/features" element={<Features />} />
         <Route path="/pricing" element={<Pricing />} />

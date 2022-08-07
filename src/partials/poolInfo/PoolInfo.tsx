@@ -1,11 +1,11 @@
 import React,{ useState, useRef, useEffect }from 'react';
 import { Link } from 'react-router-dom';
-import keenLogo from '../images/token/keen.jpg';
-import usdtLogo from '../images/token/usdt.png';
+import keenLogo from '../../images/token/keen.jpg';
+import usdtLogo from '../../images/token/usdt.png';
 import AnalyticsLiquidity from './AnalyticsLiquidity';
 import AnalyticsVolume from './AnalyticsVolume';
-import Transaction from './transaction/Transaction'
-import Dropdown from '../utils/Dropdown';
+import Transaction from '../transaction/Transaction'
+import Dropdown from '../../utils/Dropdown';
 function PoolInfo() {
   const [tabIndex,setTabIndex] = useState(0);
   return (
@@ -26,7 +26,7 @@ function PoolInfo() {
                     <img src={keenLogo} className='h-8 w-8 bg-white rounded-full'/>
                   </div>
                   <h2 className="h2 ml-3" >USDT / KEEN</h2>
-                  <Dropdown title={"切换"}>
+                  <Dropdown title={"切换"} icon='select'>
                     <li onClick={() => {
                       
                     }}>
@@ -50,8 +50,8 @@ function PoolInfo() {
               </div>
             </div>
             {/* bottom */}
-            <div className='w-full max-w-full flex-warp md:flex justify-between'>
-              <a className='flex content-right text-purple-600 hover:underline  mt-6'>
+            <div className='w-full max-w-full flex-warp md:flex justify-between' >
+              <a href='https://bscscan.com/address/0xab839ca2e28d379b068f7d1449f16f4ea55fecdb' target={'_blank'} className='flex content-right text-purple-600 hover:underline  mt-6' data-aos="fade-up">
                 <div className=''>
                   在 BscScan 上查看
                 </div>
@@ -60,10 +60,10 @@ function PoolInfo() {
                 </svg>
               </a>
               <div className='flex space-x-2 h-16 mt-3 w-96 max-w-full'>
-                <button className='font-medium w-2/3 inline-flex items-center justify-center border border-purple-600 hover:border-purple-700 px-4 py-1 my-2 rounded-sm text-purple-600 bg-transparent  transition duration-150 ease-in-out'>
+                <Link to={`/add`} className='font-medium w-2/3 inline-flex items-center justify-center border border-purple-600 hover:border-purple-700 px-4 py-1 my-2 rounded-sm text-purple-600 bg-transparent  transition duration-150 ease-in-out' data-aos="fade-up" data-aos-delay="200">
                   增加流动性
-                </button>
-                <Link to="/trade" className='font-medium w-1/3 inline-flex items-center justify-center border border-transparent px-4 py-1 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out'>
+                </Link>
+                <Link to="/trade" className='font-medium w-1/3 inline-flex items-center justify-center border border-transparent px-4 py-1 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out' data-aos="fade-up" data-aos-delay="400">
                   交易
                 </Link>
               </div>
@@ -72,11 +72,11 @@ function PoolInfo() {
           
 
           {/*  Articles list */}
-          <div className="max-w-sm mx-auto md:max-w-none  md:space-x-3 flex-warp md:flex">
+          <div className="max-w-full mx-auto md:max-w-none  md:space-x-3 flex-warp md:flex">
             {/*  Articles container */}
-            <div className="flex flex-col w-full md:w-1/3 space-y-3">
+            <div className="flex flex-col w-full md:w-1/3 space-y-3" data-aos="fade-up" data-aos-delay="200">
               {/*  1st article */}
-              <div className="flex flex-col h-full bg-gray-800 rounded-2xl" data-aos="fade-up">
+              <div className="flex flex-col h-full bg-gray-800 rounded-2xl " >
                 <div className='m-6 flex flex-row justify-between'>
                   <div className='space-y-3'>
                     <div className='text-cyan-600'>
@@ -116,7 +116,8 @@ function PoolInfo() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col h-full bg-gray-800 rounded-2xl" data-aos="fade-up">
+              {/*  2st article */}
+              <div className="flex flex-col h-full bg-gray-800 rounded-2xl">
                 <div className='m-6 flex flex-row justify-between'>
                   <div className='space-y-3'>
                     <div className='text-cyan-600'>
@@ -157,7 +158,7 @@ function PoolInfo() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-full md:w-2/3 bg-gray-800 rounded-t-2xl mt-3 md:mt-0">
+            <div className="flex flex-col w-full md:w-2/3 bg-gray-800 rounded-2xl mt-3 md:mt-0" data-aos="fade-up" data-aos-delay="200">
               <div className='w-full flex bg-cyan-600 h-12 rounded-t-2xl '>
                 <button className={`w-full  h-full text-center  rounded-t-2xl ${tabIndex==0?'bg-gray-800':''}`} onClick={()=>{setTabIndex(0)}}>
                   流动性
@@ -166,7 +167,7 @@ function PoolInfo() {
                   交易量
                 </button>
               </div>
-              <div className='h-96 md:h-full'>
+              <div className='h-96 md:h-full min-h-max' >
                 {
                   tabIndex == 0 && <AnalyticsLiquidity/>
                 }
@@ -177,7 +178,7 @@ function PoolInfo() {
               
             </div>
           </div>
-          <div  className="max-w-sm mx-auto md:max-w-none  md:space-x-3 flex-warp md:flex">
+          <div  className="max-w-full mx-auto md:max-w-none  md:space-x-3 flex-warp md:flex" data-aos="fade-up">
             
             <Transaction />
           </div>

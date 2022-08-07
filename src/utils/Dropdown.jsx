@@ -4,7 +4,8 @@ import Transition from '../utils/Transition';
 
 function Dropdown({
   children,
-  title
+  title,
+  icon
 }) {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -23,12 +24,12 @@ function Dropdown({
         aria-expanded={dropdownOpen}
         onClick={(e) => e.preventDefault()}
       >
-        <span className='hidden md:flex'>{title}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 flex md:hidden " fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+        <span className=''>{title}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${icon == 'language'?'flex':'hidden'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
         </svg>
         
-        <svg className="w-3 h-3 fill-current text-gray-500 cursor-pointer ml-1 shrink-0 hidden md:flex" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+        <svg className={`w-3 h-3 fill-current text-gray-500 cursor-pointer ml-1 shrink-0 ${icon == 'select'?'flex':'hidden'}`} viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
           <path d="M10.28 4.305L5.989 8.598 1.695 4.305A1 1 0 00.28 5.72l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z" />
         </svg>
       </a>

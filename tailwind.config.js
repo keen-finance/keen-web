@@ -35,8 +35,9 @@ module.exports = {
         '1/1': '100%',
       },
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-        'architects-daughter': ['"Architects Daughter"', 'sans-serif']
+        // inter: ['Inter', 'sans-serif'],
+        // 'architects-daughter': ['"Architects Daughter"', 'sans-serif']
+        'mono': [],
       },
       fontSize: {
         xs: '0.75rem',
