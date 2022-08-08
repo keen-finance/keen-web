@@ -30,5 +30,16 @@
                 }
             }
         }
+
+        &:disabled {
+
+            + label {
+                @apply cursor-not-allowed bg-slate-100 border border-slate-200;
+
+                > span:first-child {
+                    @apply bg-slate-400;
+                }
+            }            
+        }
     }
 }

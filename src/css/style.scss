@@ -25,4 +25,15 @@
 
 // AOS styles
 $aos-distance: 10px;
+input[type=number] {
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+    -moz-appearance: textfield;
+    
+}
+
+
 @import 'node_modules/aos/src/sass/aos.scss';

@@ -139,7 +139,7 @@ function PoolInfoAdd() {
                   减少流动性
                 </button>
               </div>
-              <div className='h-96 md:h-full min-h-max' >
+              <div className='' >
                 {
                   tabIndex == 0 && <AddLiquidity/>
                 }
