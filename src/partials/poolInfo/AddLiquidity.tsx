@@ -181,7 +181,7 @@ function AddLiquidity() {
               render={({ field }) => (
                 <>
                 <input type="checkbox" id="committee" className="sr-only" disabled={!watch('inAmount0') || watch('inAmount0') < 5000} onChange={(e) => field.onChange(e.target.checked)} checked={field.value} {...register("committee")}/>
-                <label className="bg-slate-400" htmlFor="committee">
+                <label className={`bg-slate-400 ${!watch('inAmount0') || watch('inAmount0') < 5000 ? 'opacity-25':''}`} htmlFor="committee">
                   <span className="bg-white shadow-sm" aria-hidden="true"></span>
                   <span className="sr-only">Switch label</span>
                 </label>
@@ -206,7 +206,7 @@ function AddLiquidity() {
         
         <div className="flex flex-wrap  mt-6">
           <div className="w-full ">
-            <input type="submit" className="btn text-white bg-purple-600 hover:bg-purple-700 w-full cursor-pointer" value='供应'/>
+            <input type="submit" className="btn text-white font-semibold  bg-purple-600 hover:bg-purple-700 w-full cursor-pointer  rounded-2xl  disabled:cursor-not-allowed	disabled:opacity-25" value='供应'/>
           </div>
         </div>
       </form>

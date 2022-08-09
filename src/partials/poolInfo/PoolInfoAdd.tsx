@@ -71,7 +71,7 @@ function PoolInfoAdd() {
               {/*  1st article */}
               <div className="flex flex-col h-full bg-gray-800 rounded-2xl " >
                 <div className='ml-6 mt-6 text-cyan-600'>
-                  流动性
+                  我的流动性
                 </div>
                 
                 <div className='m-6 p-3 space-y-3 rounded rounded-xl bg-gray-900'>
