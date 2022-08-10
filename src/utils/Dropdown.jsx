@@ -36,7 +36,7 @@ function Dropdown({
       <Transition
         show={dropdownOpen}
         tag="ul"
-        className="origin-top-right absolute top-full right-0 w-40 bg-gray-800 py-2 ml-4 rounded-sm"
+        className="origin-top-right absolute top-full right-0 w-40 bg-gray-600 py-2 ml-4 rounded-sm z-10"
         enter="transition ease-out duration-200 transform"
         enterStart="opacity-0 -translate-y-2"
         enterEnd="opacity-100 translate-y-0"

@@ -35,9 +35,9 @@ module.exports = {
         '1/1': '100%',
       },
       fontFamily: {
-        // inter: ['Inter', 'sans-serif'],
-        // 'architects-daughter': ['"Architects Daughter"', 'sans-serif']
-        'mono': [],
+        inter: ['Inter', 'sans-serif'],
+        'architects-daughter': ['"Architects Daughter"', 'sans-serif']
+        // 'mono': [],
       },
       fontSize: {
         xs: '0.75rem',
@@ -70,12 +70,18 @@ module.exports = {
       },
       animation: {
         float: 'float 3s ease-in-out infinite',
+        shakeX: 'shakeX 0.5s ease-in-out infinite',
       },
+      
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0)', },
           '50%': { transform: 'translateY(-5%)', },
         },
+        shakeX:{
+          '10%,30%,50%,70%,90%': { transform: 'translate3d(-0.5rem, 0, 0)', },
+          '20%,40%,60%,80%': { transform: 'translate3d(0.5rem, 0, 0)', },
+        }
       },
     },
   },

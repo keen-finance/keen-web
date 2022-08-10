@@ -4,19 +4,21 @@ import keenLogo from '../../images/token/keen.jpg';
 import Dropdown from '../../utils/Dropdown';
 import Banner from '../Banner';
 import Tooltip from '../Tooltip';
-import { useForm,useWatch, SubmitHandler,Controller } from "react-hook-form";
+import { useForm,useWatch, useController,SubmitHandler,Controller } from "react-hook-form";
 
 type Inputs = {
   outRadio: number
 };
 const defaultValues = {
-  outRadio:0,
+  outRadio: 0
 };
 
 function RemoveLiquidity() {
 
 
-  const { register, handleSubmit, watch,getValues,setValue,control, formState: { errors,isSubmitting, isDirty, isValid } } = useForm<Inputs>({defaultValues});
+  const { register, handleSubmit, watch,getValues,setValue,control, formState: { errors,isSubmitting, isDirty, isValid } } = useForm<Inputs>({defaultValues,});
+
+  // const { field, fieldState } = useController({name:'outRadio',control:control});
 
   const [balanceLp,setBalanceLp] = useState(1000)
   const [balanceLpLock,setBalanceLpLock] = useState(100)
@@ -24,7 +26,7 @@ function RemoveLiquidity() {
   
   const outRadio = useWatch({ control,name: 'outRadio' });
   const [bannerWarningOpen,setBannerWarningOpen]  = useState(false);
-
+  const [shakeX,setShakeX]  = useState(false);
 
 
   const [submittingId,setSubmittingId] = useState()
@@ -33,11 +35,15 @@ function RemoveLiquidity() {
   const submit2Loading = submittingId == 'submit2' && isSubmitting;
 
 
-  const submit1Disabled = submit1Loading;
-  const submit2Disabled = submit2Loading || !isDirty || bannerWarningOpen;
-  // console.log(isDirty)
-  console.log(errors)
-  console.log(isValid)
+  const submit1Disabled = submit1Loading || !isDirty || (submittingId && !isValid);
+  const submit2Disabled = submit2Loading || !isDirty || !isValid || bannerWarningOpen;
+
+  useEffect(()=>{
+    if(errors.outRadio){
+      setShakeX(true);
+      setTimeout(()=>{setShakeX(false)},1000)
+    }
+  },[errors.outRadio])
 
   const onSubmit: SubmitHandler<Inputs> = async (data,event) => {
     const { id } = event.nativeEvent.submitter; // <-- access submitter id
@@ -49,7 +55,6 @@ function RemoveLiquidity() {
       handlers[id](data,event); // <--proxy event to proper callback handler
     }
   };
-  
 
   const  handlesubmit_task1  : SubmitHandler<Inputs> = (data,event) => {
     event.preventDefault();
@@ -70,10 +75,6 @@ function RemoveLiquidity() {
     submit1: handlesubmit_task1,
     submit2: handlesubmit_task2,
   }
-
-
-  
-
   
   useEffect(()=>{
     let out = balanceLp * outRadio / 100;
@@ -100,21 +101,40 @@ function RemoveLiquidity() {
     <div className="flex ">
       <form className="w-full mx-3 md:mx-12 my-6 space-y-8" onSubmit={handleSubmit(onSubmit)}>
         {/* input-1 */}
-        <div className="w-full">
-          <label className='text-sm font-medium ml-2 text-cyan-600' htmlFor="committee">
+        <div className={`w-full ${shakeX && 'animate-shakeX'}`}>
+
+          <label className='flex text-sm font-medium ml-2 justify-between' htmlFor="committee">
+            <div className='font-bold text-cyan-600'>
             金额
+            </div>
+            <div className='font-bold text-red-500'>
+              {errors.outRadio && errors.outRadio.message}
+            </div>
           </label>
 
           <Controller
+          
             name="outRadio"
             control={control}
             rules={{
-              required:true,
-              min:1,
-              max:100
+              required: {
+                value: true,
+                message: 'This field is required',
+              },
+              min: {
+                value: 1,
+                message: 'Cannot be lower than 1',
+              },
+              max: {
+                value: 100,
+                message: 'Cannot be higher than 100',
+              },
+              validate: {
+                lessUnLockBalance: v => (balanceLp * v / 100) <= (balanceLp-balanceLpLock) || 'Cannot contain unreleased committees',
+              }
             }}
             render={({ field }) => 
-            <div className='flex flex-col bg-slate-700 rounded-2xl space-y-8 p-3'>
+            <div className={`flex flex-col bg-slate-700 rounded-2xl space-y-8 p-3 ${errors.outRadio && 'border-4 border-red-500'}`}>
               <div className='font-bold text-4xl'>
                 {field.value}%
               </div>
@@ -124,28 +144,27 @@ function RemoveLiquidity() {
               </div>
               
               <div className='flex text-sm items-center justify-around space-x-2 w-full'>
-                <div onClick={()=>setValue(field.name,25)} className='font-semibold items-center cursor-pointer justify-center bg-gray-700 hover:bg-gray-800 rounded-2xl text-purple-600 hover:text-purple-700 duration-150 ease-in-out px-3 py-1'>
+                <div onClick={()=>setValue("outRadio",25, { shouldDirty: true,shouldValidate:true })} className='font-semibold items-center cursor-pointer justify-center bg-gray-700 hover:bg-gray-800 rounded-2xl text-purple-600 hover:text-purple-700 duration-150 ease-in-out px-3 py-1'>
                 25%
                 </div>
-                <div onClick={()=>setValue(field.name,50)} className='font-semibold items-center cursor-pointer justify-center bg-gray-700 hover:bg-gray-800  rounded-2xl text-purple-600 hover:text-purple-700 duration-150 ease-in-out px-3 py-1'>
+                <div onClick={()=>setValue("outRadio",50, { shouldDirty: true,shouldValidate:true })} className='font-semibold items-center cursor-pointer justify-center bg-gray-700 hover:bg-gray-800  rounded-2xl text-purple-600 hover:text-purple-700 duration-150 ease-in-out px-3 py-1'>
                 50%
                 </div>
-                <div onClick={()=>setValue(field.name,75)} className='font-semibold items-center cursor-pointer justify-center bg-gray-700 hover:bg-gray-800 rounded-2xl text-purple-600 hover:text-purple-700 duration-150 ease-in-out px-3 py-1'>
+                <div onClick={()=>setValue("outRadio",75, { shouldDirty: true,shouldValidate:true })} className='font-semibold items-center cursor-pointer justify-center bg-gray-700 hover:bg-gray-800 rounded-2xl text-purple-600 hover:text-purple-700 duration-150 ease-in-out px-3 py-1'>
                 75%
                 </div>
-                <div onClick={()=>setValue(field.name,100)} className='font-semibold items-center cursor-pointer justify-center bg-gray-700 hover:bg-gray-800 rounded-2xl text-purple-600 hover:text-purple-700 duration-150 ease-in-out px-3 py-1' >
+                <div onClick={()=>setValue("outRadio",100, { shouldDirty: true,shouldValidate:true })} className='font-semibold items-center cursor-pointer justify-center bg-gray-700 hover:bg-gray-800 rounded-2xl text-purple-600 hover:text-purple-700 duration-150 ease-in-out px-3 py-1' >
                 100%
                 </div>
               </div>
             </div>
             }
-
-
           />
         </div>
+        
         {
           bannerWarningOpen && 
-          <div className='flex flex-col item-center space-y-3'>
+          <div className={`flex flex-col item-center space-y-3 ${shakeX && 'animate-shakeX'}`}>
             <Banner type="warning" open={bannerWarningOpen} setOpen={setBannerWarningOpen} className="" data-aos="fade-up" data-aos-delay="200" hasClose={false}>
               {`需要保留委员会冻结的 ${balanceLpLock} 枚LP`}
             </Banner>
@@ -153,8 +172,6 @@ function RemoveLiquidity() {
             好的
             </button>
           </div>
-
-
         }
         <div className='w-full'>
           <label className='text-sm font-medium ml-2 text-cyan-600' htmlFor="committee">
