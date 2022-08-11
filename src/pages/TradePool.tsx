@@ -22,7 +22,7 @@ function TradePool() {
           <PageIllustration />
         </div>
         <AppPageHeader>
-          <div className='flex space-x-2 md:h-16 max-w-full content-end items-end'>
+          <div className='flex space-x-2  max-w-full content-end items-end'>
             <Link to={`/add`} className=' text-xs md:text-base  inline-flex items-center justify-center border border-purple-600 hover:border-purple-700 px-2 py-1 md:px-4 md:py-1  rounded-sm text-purple-600 bg-transparent  transition duration-150 ease-in-out' data-aos="fade-up" data-aos-delay="200">
               增加流动性
             </Link>

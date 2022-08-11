@@ -15,7 +15,7 @@ import HeroWord from '../partials/HeroWord';
 import Audited from '../partials/Audited';
 function Home() {
   return (
-    <div className="flex flex-col min-h-screen overflow-hidden">
+    <div className="flex flex-col min-h-screen overflow-hidden font-mono">
 
       {/*  Site header */}
       <Header />

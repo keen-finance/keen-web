@@ -118,7 +118,7 @@ function AppHeader(props) {
             {/* Logo */}
             <Link to="/" className="flex" aria-label="Cruip">
               <img src={Logo} alt="" className="w-8 h-8"/>
-              <span className='text-2xl font-mono font-medium ml-2  hidden md:flex'>Keen Finace</span>
+              <span className='text-2xl font-medium ml-2  hidden md:flex'>Keen Finace</span>
             </Link>
           </div>
 

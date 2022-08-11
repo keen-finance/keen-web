@@ -3,7 +3,7 @@ import usdtLogo from '../../images/token/usdt.png';
 import keenLogo from '../../images/token/keen.jpg';
 import Dropdown from '../../utils/Dropdown';
 import Banner from '../Banner';
-import Tooltip from '../Tooltip';
+import Tooltip from '../../utils/Tooltip';
 import { useForm,useWatch, SubmitHandler,Controller } from "react-hook-form";
 
 type Inputs = {

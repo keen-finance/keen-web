@@ -35,12 +35,12 @@ function ModalBasic({
     <>
       {/* Modal backdrop */}
       <Transition
-        className="fixed inset-0 bg-white bg-opacity-10 backdrop-blur-md rounded drop-shadow-lg z-50 "
+        className="fixed inset-0 bg-white bg-opacity-10  z-50 "
         show={modalOpen}
-        enter="transition ease-out duration-200"
+        enter="transition ease-out duration-700"
         enterStart="opacity-0"
         enterEnd="opacity-100"
-        leave="transition ease-out duration-100"
+        leave="transition ease-out duration-700"
         leaveStart="opacity-100"
         leaveEnd="opacity-0"
         aria-hidden="true"
@@ -48,16 +48,16 @@ function ModalBasic({
       {/* Modal dialog */}
       <Transition
         id={id}
-        className="fixed inset-0 z-50 overflow-hidden flex items-center my-4 justify-center transform px-4 sm:px-6"
+        className="fixed inset-x-0 bottom-0 md:inset-0 z-50 overflow-hidden flex items-center md:my-4 justify-center transform  md:px-4"
         role="dialog"
         aria-modal="true"
         show={modalOpen}
-        enter="transition ease-in-out duration-200"
-        enterStart="opacity-0 translate-y-4"
-        enterEnd="opacity-100 translate-y-0"
-        leave="transition ease-in-out duration-200"
-        leaveStart="opacity-100 translate-y-0"
-        leaveEnd="opacity-0 translate-y-4"
+        enter="transition md:transition-none transform-gpu ease-in-out duration-700"
+        enterStart="translate-y-full "
+        enterEnd="translate-y-0"
+        leave="transition md:transition-none transform-gpu ease-in-out duration-700"
+        leaveStart="translate-y-0"
+        leaveEnd="translate-y-full"
       >
         <div ref={modalContent} className="bg-gray-800 rounded shadow-lg overflow-auto max-w-lg w-full max-h-full">
           {/* Modal header */}

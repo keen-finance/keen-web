@@ -36,8 +36,8 @@ module.exports = {
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
-        'architects-daughter': ['"Architects Daughter"', 'sans-serif']
-        // 'mono': [],
+        'architects-daughter': ['"Architects Daughter"', 'sans-serif'],
+        kanit:['Kanit', 'sans-serif']
       },
       fontSize: {
         xs: '0.75rem',
@@ -84,6 +84,7 @@ module.exports = {
         }
       },
     },
+
   },
   plugins: [
     require('@tailwindcss/forms'),
