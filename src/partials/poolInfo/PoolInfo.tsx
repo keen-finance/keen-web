@@ -12,7 +12,7 @@ function PoolInfo() {
     <section className="relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pb-12 md:pb-20">
-          {/*  Articles list */}
+          
           <div className="max-w-full mx-auto md:max-w-none  md:space-x-3 flex-warp md:flex">
             {/*  Articles container */}
             <div className="flex flex-col w-full md:w-1/3 space-y-3" data-aos="fade-up" data-aos-delay="200">
@@ -58,7 +58,7 @@ function PoolInfo() {
                 </div>
               </div>
               {/*  2st article */}
-              <div className="flex flex-col h-full bg-gray-800 rounded-2xl">
+              {/* <div className="flex flex-col h-full bg-gray-800 rounded-2xl">
                 <div className='m-6 flex flex-row justify-between'>
                   <div className='space-y-3'>
                     <div className='text-cyan-600'>
@@ -97,7 +97,7 @@ function PoolInfo() {
                     <span className="">1,000</span>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="flex flex-col w-full md:w-2/3 bg-gray-800 rounded-2xl mt-3 md:mt-0" data-aos="fade-up" data-aos-delay="200">
               <div className='w-full flex bg-cyan-600 h-12 rounded-t-2xl '>

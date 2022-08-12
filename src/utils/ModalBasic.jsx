@@ -35,7 +35,7 @@ function ModalBasic({
     <>
       {/* Modal backdrop */}
       <Transition
-        className="fixed inset-0 bg-white bg-opacity-10  z-50 "
+        className="fixed inset-0 bg-white bg-opacity-10 z-10"
         show={modalOpen}
         enter="transition ease-out duration-700"
         enterStart="opacity-0"
@@ -61,7 +61,7 @@ function ModalBasic({
       >
         <div ref={modalContent} className="bg-gray-800 rounded shadow-lg overflow-auto max-w-lg w-full max-h-full">
           {/* Modal header */}
-          <div className="px-5 py-3 border-b border-slate-200">
+          <div className="px-5 py-3 border-b border-gray-700">
             <div className="flex justify-between items-center">
               <div className="font-semibold text-white">{title}</div>
               <button className="text-slate-400 hover:text-slate-500" onClick={(e) => { e.stopPropagation(); setModalOpen(false); }}>

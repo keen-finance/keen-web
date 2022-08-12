@@ -30,11 +30,11 @@ function BetResult(props) {
       let ss = nowDate.format('ss');
   
       if(mm.length > 1){
-        haveMin = mm.charAt(1);
+        haveMin = Number(mm.charAt(1));
       }else{
-        haveMin = mm;
+        haveMin = Number(mm);
       }
-      if(ss >= 30){
+      if(Number(ss) >= 30){
         haveMin = Number(haveMin)+1;
       }else{
         haveMin = Number(haveMin)+0.5;
@@ -81,11 +81,11 @@ function BetResult(props) {
     let ss = nowDate.format('ss');
 
     if(mm.length > 1){
-      haveMin = mm.charAt(1);
+      haveMin = Number(mm.charAt(1));
     }else{
-      haveMin = mm;
+      haveMin = Number(mm);
     }
-    if(ss >= 30){
+    if(Number(ss) >= 30){
       haveMin = Number(haveMin)+1;
     }else{
       haveMin = Number(haveMin)+0.5;
@@ -131,10 +131,10 @@ function BetResult(props) {
   return (
     <>
       
-      <div className="h-2/6">
-      <header className=" border-b border-gray-700 lg:16 lg:my-5 lg:mx-5 ">
-        <span className="font-semibold text-white">投注结果</span>
-      </header>
+      <div className=" w-full  py-2">
+        {/* <header className=" border-b border-gray-700 lg:16 lg:my-5 lg:mx-5 ">
+          <span className="font-semibold text-white">投注结果</span>
+        </header> */}
         <div className='flex justify-between mx-2 mt-1'>
           {
               circleResult.map((item, index) => {
@@ -148,10 +148,10 @@ function BetResult(props) {
                           }else if(item2.open > item2.close){
                             return <div key={index+''+index2} className='lg:w-6 lg:h-6 w-4 h-4 bg-red-500 rounded-full m-auto'/>
                           }else{
-                            return <div key={index+''+index2} className='lg:w-6 lg:h-6 w-4 h-4 bg-slate-200 border border-slate-200 rounded-full m-auto'/>
+                            return <div key={index+''+index2} className='lg:w-6 lg:h-6 w-4 h-4 bg-slate-200 border border-slate-600 rounded-full m-auto'/>
                           }
                         }else{
-                          return <div key={index+''+index2} className='lg:w-6 lg:h-6 w-4 h-4 border border-slate-200 rounded-full m-auto'/>
+                          return <div key={index+''+index2} className='lg:w-6 lg:h-6 w-4 h-4 border border-slate-600 rounded-full m-auto'/>
                         }
                       })
                     }
@@ -166,10 +166,10 @@ function BetResult(props) {
                           }else if(item3.open > item3.close){
                             return <div key={index+''+index3} className='lg:w-6 lg:h-6 w-4 h-4 bg-red-500 rounded-full m-auto'/>
                           }else{
-                            return <div key={index+''+index3} className='lg:w-6 lg:h-6 w-4 h-4 bg-slate-200 border border-slate-200 rounded-full m-auto'/>
+                            return <div key={index+''+index3} className='lg:w-6 lg:h-6 w-4 h-4 bg-slate-200 border border-slate-600 rounded-full m-auto'/>
                           }
                         }else{
-                          return <div key={index+''+index3} className='lg:w-6 lg:h-6 w-4 h-4 border border-slate-200 rounded-full m-auto'/>
+                          return <div key={index+''+index3} className='lg:w-6 lg:h-6 w-4 h-4 border border-slate-600 rounded-full m-auto'/>
                         }
                       })
                     }

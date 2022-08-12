@@ -7,33 +7,75 @@ import Transaction from '../transaction/Transaction'
 import Dropdown from '../../utils/Dropdown';
 import ModalBasic from '../../utils/ModalBasic';
 import BetView from './BetView'
+import BetResult from './BetResult';
+import Config from '../../settings'
+import { useWeb3React } from "@web3-react/core";
+import useWebSocket, { ReadyState } from 'react-use-websocket';
+import generatedKLineDataList from '../../utils/generatedKLineDataList'
+
 function TradeInfo() {
   const [tabIndex,setTabIndex] = useState(0);
-  const [betModalOpen, setBetModalOpen] = useState(true);
-  const [betStartTime, setBetStartTime] = useState(Number);
-  const [countdown, setCountdown] = useState(0);
+  const [betModalOpen, setBetModalOpen] = useState(false);
+  const websocket = useRef()
+  const [webSocketUrl,setWebSocketUrl] = useState(Config[Config.NODE_ENV].VUE_APP_SOCKET_API+'/webSocket/tourists');
 
-  useEffect(()=>{
-    console.log("countdown",countdown)
-    if(countdown > 0){
-      let interval2 = setTimeout(function(){
-        setCountdown(countdown-1)
-      },1000)
-    }else{
-      setCountdown(null)
+  const [circleInitData, setCircleInitData] = useState([])
+  const [circleLastData, setCircleLastData] = useState()
+
+  const [klineInitData, setKlineInitData] = useState([])
+  const [klineLastData, setKlineLastData] = useState()
+  const {
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error
+  } = useWeb3React();
+  const webSocket = useWebSocket(webSocketUrl,{},true);
+
+
+  
+
+
+
+  useEffect(() =>{
+    if(webSocket.readyState == ReadyState.OPEN){
+      webSocket.sendMessage('kline')
     }
-  },[countdown])
+  },[webSocket.readyState])
+  useEffect(() =>{
+    if(!webSocket.lastJsonMessage){
+      return;
+    }
 
-  useEffect(()=>{
+    const data = webSocket.lastJsonMessage
+    
+    if (data.msgType === 'KLINE') {
+      let obj = JSON.parse(data.msg)
+      obj.timestamp = obj.id
+      console.log(obj)
+      setKlineLastData(obj)
+      
+    } else if(data.msgType === 'KLINE_RESULT'){
+      setCircleLastData(data.msg);
+    }
+  },[webSocket.lastJsonMessage])
 
-    setCountdown(10) 
-
-    let interval2 = setInterval(function(){
-      setCountdown(10) 
-    },20000)
-    return () =>{
-      // clearInterval(interval1)
-      clearInterval(interval2)
+  useEffect(() =>{
+    setWebSocketUrl(Config[Config.NODE_ENV].VUE_APP_SOCKET_API+'/webSocket/13246')
+    generatedKLineDataList().then(data => {
+      let list = data.content;
+      for (let index = 0; index < list.length; index++) {
+        list[index].timestamp = list[index].id
+      }
+      let datas = list.reverse()
+      setKlineInitData(datas)
+      setCircleInitData(datas)
+    })
+    return ()=>{
+      webSocket.getWebSocket().close()
     }
   },[])
 
@@ -42,9 +84,9 @@ function TradeInfo() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-16 md:pt-32 pb-3">
           
-          <div className="max-w-full mx-auto md:max-w-none md:space-x-3 flex-warp md:flex ">
+          <div className="max-w-full mx-auto md:max-w-none gap-3 flex-warp md:flex">
             {/*  Kline view */}
-            <div className="flex flex-col w-full md:w-2/3 space-y-3 " >
+            <div className="flex flex-col w-full md:w-2/3 gap-3 rounded-2xl" >
               <div className='flex bg-gray-800 rounded-2xl items-start md:items-center shadow shadow-gray-600 py-1 md:py-4' >
 
                 <div className='flex flex-col md:flex-row items-center'>
@@ -74,9 +116,9 @@ function TradeInfo() {
 
                   <div className='h-16 my-auro mr-4 border-l border-gray-700 hidden md:flex'>
                   </div>
-
-                  <div className='font-bold text-3xl mr-4 text-teal-400'>
-                    2000.9
+                  <div className='flex flex-col items-start space-y-1 mr-4 mt-2 '>
+                    <div className=' text-gray-500'>BTC最新价</div>
+                    <div className='font-bold text-3xl text-teal-400'>1,876.4</div>
                   </div>
                 </div>
 
@@ -109,59 +151,17 @@ function TradeInfo() {
 
 
               </div>
-              <div className='h-96 bg-gray-800 rounded-2xl mt-3 md:mt-0  shadow shadow-gray-600' >
-                <KlineView/>
+              <div className='h-96 bg-gray-800 rounded-2xl shadow shadow-gray-600' >
+                <KlineView initData={klineInitData} lastData={klineLastData}/>
               </div>
-              
             </div>
             {/*  bet view desktop */}
-            <BetView/>
-            {/*  bet view mobile */}
-            <div className='md:hidden fixed inset-x-0 bottom-0 w-full bg-gray-800 z-10 rounded-t-2xl shadow-2xl shadow-white p-4'>
-              <div className='flex flex-col w-full items-center '>
-                {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg> */}
-                {
-                  countdown && countdown > 0 && 
-                  <>
-                  <div className='text-xs text-slate-300'>等待时间</div>
-                  <div className='text-white space-x-2'>
-                    <span className='text-2xl font-bold '>{countdown}</span>
-                    <span>S</span>
-                  </div>
-                  </>
-                }
-                {
-                  !countdown && 
-                  <>
-                  <div className='text-white space-x-2'>
-                    <span>做比交易吧</span>
-                  </div>
-                  </>
-                }
-                
-              </div>
-              
-              <div className='flex flex-nowrap space-x-4 text-white '>
-                <button className="btn  bg-teal-500 w-full rounded-full disabled:cursor-not-allowed	disabled:opacity-25" disabled={countdown != null}>
-                  买
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                  </svg>
-                </button>
-                <button className="btn  bg-red-500  w-full rounded-full disabled:cursor-not-allowed	disabled:opacity-25" disabled={countdown != null}>
-                  卖
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <ModalBasic id="walletModal" modalOpen={betModalOpen} setModalOpen={setBetModalOpen} title={''}>
+            <div className='hidden md:flex flex-col w-full md:w-1/3'>
               <BetView/>
-            </ModalBasic>
-            
+            </div>
+          </div>
+          <div  className="max-w-full mx-auto md:max-w-none  md:space-x-3 flex-warp md:flex  shadow shadow-gray-600 bg-gray-800 rounded-2xl mt-3" >
+            <BetResult initData={circleInitData} lastData={circleLastData}/>
           </div>
           <div  className="max-w-full mx-auto md:max-w-none  md:space-x-3 flex-warp md:flex" >
             
@@ -169,7 +169,27 @@ function TradeInfo() {
           </div>
           
         </div>
-
+        <ModalBasic id="betViewModal" modalOpen={betModalOpen} setModalOpen={setBetModalOpen} title={'交易面板'}>
+              <BetView/>
+            </ModalBasic>
+            {/*  bet view mobile */}
+            <div className='md:hidden fixed inset-x-0 bottom-0 w-full bg-gray-800 rounded-t-2xl shadow-2xl shadow-white p-4 z-10'>
+              <div className='flex flex-nowrap space-x-4 text-white '>
+              
+                <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBetModalOpen(true); }}  className="btn  bg-teal-500 w-full rounded-full ">
+                  买
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  </svg>
+                </button>
+                <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBetModalOpen(true); }}  className="btn  bg-red-500  w-full rounded-full">
+                  卖
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+                  </svg>
+                </button>
+              </div>
+            </div>
       </div>
 
     </section>

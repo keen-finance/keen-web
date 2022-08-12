@@ -35,6 +35,9 @@ input[type=number] {
     
 }
 
+#custom-style-k-line:first-child > div:first-child > div:first-child > div:first-child  {
+   background:  url('/src/images/logo/logo_word_mini.png')  center no-repeat 
+}
 
 
 @import 'node_modules/aos/src/sass/aos.scss';
