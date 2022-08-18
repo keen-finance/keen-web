@@ -12,6 +12,28 @@ import Config from '../../settings'
 import { useWeb3React } from "@web3-react/core";
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import generatedKLineDataList from '../../utils/generatedKLineDataList'
+import NumberFormat  from 'react-number-format';
+
+type KlineHeadData =   {
+  lastPrice: number,
+  timestamp: number,
+  buyVolume: number,
+  sellVolume: number,
+  sellVolume24: number,
+  buyVolume24:number,
+  longTims24:number,
+  shortTimes24:number,
+}
+const defaultValues:KlineHeadData = {
+  lastPrice: 0,
+  timestamp: 0,
+  sellVolume: 0,
+  buyVolume:0,
+  sellVolume24: 0,
+  buyVolume24:0,
+  longTims24:0,
+  shortTimes24:0,
+};
 
 function TradeInfo() {
   const [tabIndex,setTabIndex] = useState(0);
@@ -24,6 +46,8 @@ function TradeInfo() {
 
   const [klineInitData, setKlineInitData] = useState([])
   const [klineLastData, setKlineLastData] = useState()
+
+  const [klineHeadData, setKlineHeadData] = useState(defaultValues)
   const {
     library,
     chainId,
@@ -34,11 +58,6 @@ function TradeInfo() {
     error
   } = useWeb3React();
   const webSocket = useWebSocket(webSocketUrl,{},true);
-
-
-  
-
-
 
   useEffect(() =>{
     if(webSocket.readyState == ReadyState.OPEN){
@@ -57,7 +76,7 @@ function TradeInfo() {
       obj.timestamp = obj.id
       console.log(obj)
       setKlineLastData(obj)
-      
+      setKlineHeadData({...klineHeadData,lastPrice:obj.close,timestamp:obj.timestamp})
     } else if(data.msgType === 'KLINE_RESULT'){
       setCircleLastData(data.msg);
     }
@@ -118,40 +137,42 @@ function TradeInfo() {
                   </div>
                   <div className='flex flex-col items-start space-y-1 mr-4 mt-2 '>
                     <div className=' text-gray-500'>BTC最新价</div>
-                    <div className='font-bold text-3xl text-teal-400'>1,876.4</div>
+                    <div className='text-2xl text-teal-400'>
+                      <NumberFormat value={klineHeadData.lastPrice} decimalScale={0} displayType="text" thousandSeparator={true}/>
+                    </div>
                   </div>
                 </div>
 
                 <div className='flex flex-wrap ml-6 md:m-0 text-xs '>
                   <div className='flex flex-col items-start space-y-1 mr-4 mt-2 '>
                     <div className=' text-gray-500'>当前买量</div>
-                    <div className=''>1,876.4</div>
+                    <NumberFormat value={klineHeadData.buyVolume} decimalScale={4} displayType="text" thousandSeparator={true}/>
                   </div>
                   <div className='flex flex-col items-start space-y-1 mr-4 mt-2'>
                     <div className='text-gray-500'>当前卖量</div>
-                    <div className=''>1,876.4</div>
+                    <NumberFormat value={klineHeadData.sellVolume} decimalScale={4} displayType="text" thousandSeparator={true}/>
                   </div>
                   <div className='flex flex-col items-start space-y-1 mr-4 mt-2'>
                     <div className=' text-gray-500'>24h涨(次)</div>
-                    <div className=''>10</div>
+                    <NumberFormat value={klineHeadData.longTims24} decimalScale={0} displayType="text" thousandSeparator={true}/>
                   </div>
                   <div className='flex flex-col items-start space-y-1 mr-4 mt-2'>
                     <div className=' text-gray-500'>24h跌(次)</div>
-                    <div className=''>100次</div>
+                    <NumberFormat value={klineHeadData.shortTimes24} decimalScale={0} displayType="text" thousandSeparator={true}/>
                   </div>
                   <div className='flex flex-col items-start space-y-1 mr-4 mt-2'>
                     <div className=' text-gray-500'>24h买量</div>
-                    <div className=''>1,876.4</div>
+                    <NumberFormat value={klineHeadData.buyVolume24} decimalScale={4} displayType="text" thousandSeparator={true}/>
                   </div>
                   <div className='flex flex-col items-start space-y-1 mr-4 mt-2'>
                     <div className=' text-gray-500'>24h卖量</div>
-                    <div className=''>1,876.4</div>
+                    <NumberFormat value={klineHeadData.sellVolume24} decimalScale={4} displayType="text" thousandSeparator={true}/>
                   </div>
                 </div>
 
 
               </div>
-              <div className='h-96 bg-gray-800 rounded-2xl shadow shadow-gray-600' >
+              <div className='h-96 md:h-full bg-gray-800 rounded-2xl shadow shadow-gray-600' >
                 <KlineView initData={klineInitData} lastData={klineLastData}/>
               </div>
             </div>
@@ -170,26 +191,26 @@ function TradeInfo() {
           
         </div>
         <ModalBasic id="betViewModal" modalOpen={betModalOpen} setModalOpen={setBetModalOpen} title={'交易面板'}>
-              <BetView/>
-            </ModalBasic>
-            {/*  bet view mobile */}
-            <div className='md:hidden fixed inset-x-0 bottom-0 w-full bg-gray-800 rounded-t-2xl shadow-2xl shadow-white p-4 z-10'>
-              <div className='flex flex-nowrap space-x-4 text-white '>
-              
-                <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBetModalOpen(true); }}  className="btn  bg-teal-500 w-full rounded-full ">
-                  买
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                  </svg>
-                </button>
-                <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBetModalOpen(true); }}  className="btn  bg-red-500  w-full rounded-full">
-                  卖
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-                  </svg>
-                </button>
-              </div>
-            </div>
+          <BetView/>
+        </ModalBasic>
+        {/*  bet view mobile */}
+        <div className='md:hidden fixed inset-x-0 bottom-0 w-full bg-gray-800 rounded-t-2xl shadow-2xl shadow-white p-4 z-10'>
+          <div className='flex flex-nowrap space-x-4 text-white '>
+          
+            <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBetModalOpen(true); }}  className="btn  bg-teal-500 w-full rounded-full ">
+              买
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </button>
+            <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); setBetModalOpen(true); }}  className="btn  bg-red-500  w-full rounded-full">
+              卖
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
 
     </section>

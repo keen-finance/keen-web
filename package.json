@@ -7,6 +7,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@rehooks/local-storage": "^2.4.4",
     "@tailwindcss/forms": "^0.4.0",
     "@web3-react/core": "6.1.9",
     "@web3-react/injected-connector": "6.0.7",
@@ -27,6 +28,7 @@
     "react-hook-form": "^7.34.0",
     "react-hot-toast": "^2.3.0",
     "react-i18next": "^11.18.1",
+    "react-number-format": "^4.9.3",
     "react-router-dom": "^6.2.1",
     "react-transition-group": "^4.4.1",
     "react-use-websocket": "^4.2.0"

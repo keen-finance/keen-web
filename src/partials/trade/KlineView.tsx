@@ -244,11 +244,11 @@ function KlineView({
   },[lastData,chart.current])
 
   const resizeUpdate = (e) => {
-    // 通过事件对象获取浏览器窗口的高度
-    let h = e.target.innerHeight;
-    
-    chart.current.resize();
-}
+      // 通过事件对象获取浏览器窗口的高度
+      let h = e.target.innerHeight;
+      
+      chart.current.resize();
+  }
 
 useEffect(() => {
   // 页面刚加载完成后获取浏览器窗口的大小

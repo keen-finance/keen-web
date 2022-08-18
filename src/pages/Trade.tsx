@@ -205,7 +205,7 @@ function Trade() {
 
 
   return (
-    <div className="flex flex-col  min-h-screen overflow-hidden font-kanit">
+    <div className="flex flex-col  min-h-screen overflow-hidden ">
 
       {/*  Site header */}
       <AppHeader current='trade'/>

@@ -6,8 +6,22 @@ import AnalyticsLiquidity from './AnalyticsLiquidity';
 import AnalyticsVolume from './AnalyticsVolume';
 import Transaction from '../transaction/Transaction'
 import Dropdown from '../../utils/Dropdown';
+import { useLocalStorage } from '@rehooks/local-storage';
+import {buildContracts,pairsContracts,getTokenLogo} from "../../utils/contracts";
+import {ethers,utils } from "ethers";
+import NumberFormat  from 'react-number-format';
 function PoolInfo() {
   const [tabIndex,setTabIndex] = useState(0);
+  const [parisIndex,setParisIndex] = useLocalStorage("parisIndex",0);
+  const [token0Balance,setToken0Balance] = useState(0);
+  const [token1Balance,setToken1Balance] = useState(0); 
+  useEffect(()=>{
+    setToken0Balance(0)
+    setToken1Balance(0)
+    let pairAddress = pairsContracts[parisIndex].address;
+    pairsContracts[parisIndex].token0.readContract.balanceOf(pairAddress).then((result)=>{setToken0Balance(Number(utils.formatEther(result)))})
+    pairsContracts[parisIndex].token1.readContract.balanceOf(pairAddress).then((result)=>{setToken1Balance(Number(utils.formatEther(result)))})
+  },[pairsContracts])
   return (
     <section className="relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -43,17 +57,20 @@ function PoolInfo() {
                   </div>
                   <div className="flex items-center w-full justify-between">
                     <div className='flex items-center'>
-                      <img className="rounded-full shrink-0 mr-4 w-8" src={usdtLogo} alt="Author 01" />
-                      <span  className="text-gray-200 hover:text-gray-100 transition duration-150 ease-in-out">USDT</span>
+                      <img className="rounded-full shrink-0 mr-4 w-8" src={getTokenLogo(pairsContracts[parisIndex].token0.name)} alt="Author 01" />
+                      
+                      <span  className="text-gray-200 hover:text-gray-100 transition duration-150 ease-in-out">{pairsContracts[parisIndex].token0.name}</span>
                     </div>
-                    <span className="">1,000</span>
+                    <NumberFormat value={token0Balance} decimalScale={4} displayType="text" thousandSeparator={true}/>
+                    
                   </div>
                   <div className="flex items-center w-full justify-between">
                     <div className='flex items-center'>
-                      <img className="rounded-full shrink-0 mr-4 w-8" src={usdtLogo} alt="Author 01" />
-                      <span  className="text-gray-200 hover:text-gray-100 transition duration-150 ease-in-out">USDT</span>
+                      <img className="rounded-full shrink-0 mr-4 w-8" src={getTokenLogo(pairsContracts[parisIndex].token1.name)} alt="Author 01" />
+                      <span  className="text-gray-200 hover:text-gray-100 transition duration-150 ease-in-out">{pairsContracts[parisIndex].token1.name}</span>
                     </div>
-                    <span className="">1,000</span>
+                    <NumberFormat value={token1Balance} decimalScale={4} displayType="text" thousandSeparator={true}/>
+                    
                   </div>
                 </div>
               </div>

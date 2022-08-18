@@ -207,7 +207,6 @@ function AnalyticsLiquidity() {
 
   const [webSocketUrl,setWebSocketUrl] = useState(Config[Config.NODE_ENV].VUE_APP_SOCKET_API+'/webSocket/tourists');
   useEffect(() => {
-    console.log("122323",account)
     if(account){
       setWebSocketUrl(Config[Config.NODE_ENV].VUE_APP_SOCKET_API+'/webSocket/'+account)
     }

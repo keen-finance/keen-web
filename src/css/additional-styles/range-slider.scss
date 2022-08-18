@@ -23,14 +23,17 @@ input[type=range] {
         color:rgb(147 51 234);
         background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20class%3D%22h-5%20w-5%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22rgb%2893%2093%20255%29%22%3E%0A%20%20%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M11.3%201.046A1%201%200%200112%202v5h4a1%201%200%2001.82%201.573l-7%2010A1%201%200%20018%2018v-5H4a1%201%200%2001-.82-1.573l7-10a1%201%200%20011.12-.38z%22%20clip-rule%3D%22evenodd%22%20%2F%3E%0A%3C%2Fsvg%3E");
         // background-image: url(data:image/png;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGNsYXNzPSJoLTUgdy01IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGZpbGw9ImN1cnJlbnRDb2xvciI+CiAgPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTEuMyAxLjA0NkExIDEgMCAwMTEyIDJ2NWg0YTEgMSAwIDAxLjgyIDEuNTczbC03IDEwQTEgMSAwIDAxOCAxOHYtNUg0YTEgMSAwIDAxLS44Mi0xLjU3M2w3LTEwYTEgMSAwIDAxMS4xMi0uMzh6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIC8+Cjwvc3ZnPg==);
-        background-position: center;
-        background-repeat: no-repeat;
+        // background-position: center;
+        // background-repeat: no-repeat;
         border: 0;
-        border-radius: 50%;
+        // border-radius: 50%;
         cursor: pointer;
         height: $range-thumb-size;
         width: $range-thumb-size;   
-        margin-left: 6px;         
+        // margin-left: 6px;
+        // z-index:  90;
+        position: relative;
+        
     }
     &::-webkit-slider-thumb:hover {
         height: $range-thumb-size-hover;

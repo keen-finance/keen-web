@@ -55,7 +55,7 @@ function AppHeader(props) {
     }
     const signer = provider.getSigner();
     const token = new ethers.Contract("0x3fa38E76EEBF9192D47f723B0D41b2CeFaC4275A", IERC20JSON.abi, signer) as IERC20;
-    console.log("token",token)
+    
 
     token.name().then(console.log)
   },[library]);

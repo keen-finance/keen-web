@@ -7,6 +7,7 @@ import { ethers } from "ethers";
 import { Buffer } from "buffer"; 
 import { Toaster } from 'react-hot-toast';
 import './translate/i18n';
+import {buildContracts,pairsContracts} from "./utils/contracts";
 
 
 declare global {
@@ -21,7 +22,8 @@ const getLibrary = (provider) => {
   library.pollingInterval = 8000; // frequency provider is polling
   return library;
 };
-
+await buildContracts();
+console.log(pairsContracts)
 
 ReactDOM.render(
   <React.StrictMode>

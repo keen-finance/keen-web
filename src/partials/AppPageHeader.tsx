@@ -1,15 +1,18 @@
 import React,{ useState, useRef, useEffect }from 'react';
 
-import keenLogo from '../images/token/keen.jpg';
-import usdtLogo from '../images/token/usdt.png';
 
 import Dropdown from '../utils/Dropdown';
+import { useLocalStorage } from '@rehooks/local-storage';
+import {buildContracts,pairsContracts,getTokenLogo} from "../utils/contracts";
 function AppPageHeader(
   {
     children
   }
+  
 ) {
   const [tabIndex,setTabIndex] = useState(0);
+  const [parisIndex,setParisIndex] = useLocalStorage("parisIndex",0);
+
   return (
     <section className="relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -22,36 +25,31 @@ function AppPageHeader(
               <div className='' data-aos="fade-up">
                 <div className='flex items-center h-12'>
                   <div className='flex items-center justify-between h-12'>
-                    <img src={usdtLogo} className='h-8 w-8 bg-white rounded-full'/>
-                    <img src={keenLogo} className='h-8 w-8 bg-white rounded-full'/>
+                    <img src={getTokenLogo(pairsContracts[parisIndex].token0.name)} className='h-8 w-8 bg-white rounded-full'/>
+                    <img src={getTokenLogo(pairsContracts[parisIndex].token1.name)} className='h-8 w-8 bg-white rounded-full'/>
                   </div>
-                  <h2 className="h2 ml-3" >USDT / KEEN</h2>
+                  <h2 className="h2 ml-3" >{pairsContracts[parisIndex].name}</h2>
                   <Dropdown title={"切换"} icon='select'>
-                    <li onClick={() => {
-                      
-                    }}>
-                      <div className="font-medium text-sm text-white hover:text-purple-500 flex py-2 px-4 leading-tight cursor-pointer" >
-                        <img src={usdtLogo} className='h-4 w-4 bg-white rounded-full'/>
-                        <img src={keenLogo} className='h-4 w-4 bg-white rounded-full'/>
-                        USDT / KEEN
-                      </div>
-                    </li>
-                    <li onClick={() => {
-                      
-                    }}>
-                      <div className="font-medium text-sm text-white hover:text-purple-500 flex py-2 px-4 leading-tight cursor-pointer">
-                        <img src={usdtLogo} className='h-4 w-4 bg-white rounded-full'/>
-                        <img src={keenLogo} className='h-4 w-4 bg-white rounded-full'/>
-                        TCP / KEEN
-                      </div>
-                    </li>
+                    {
+                      pairsContracts.map((item,index)=>{
+                        return <li onClick={() => {
+                          setParisIndex(index)
+                        }}>
+                          <div className="font-medium text-sm text-white hover:text-purple-500 flex py-2 px-4 leading-tight cursor-pointer" >
+                            <img src={getTokenLogo(item.token0.name)} className='h-4 w-4 bg-white rounded-full'/>
+                            <img src={getTokenLogo(item.token1.name)} className='h-4 w-4 bg-white rounded-full'/>
+                            {item.name}
+                          </div>
+                        </li>
+                      })
+                    }
                   </Dropdown>
                 </div>
               </div>
             </div>
             {/* bottom */}
             <div className='w-full max-w-full flex justify-between mt-3' >
-              <a href='https://bscscan.com/address/0xab839ca2e28d379b068f7d1449f16f4ea55fecdb' target={'_blank'} className='flex text-purple-600 hover:underline items-end' data-aos="fade-up">
+              <a href={`https://bscscan.com/address/${pairsContracts[parisIndex].address}`} target={'_blank'} className='flex text-purple-600 hover:underline items-end' data-aos="fade-up">
                 <div className=''>
                   在 BscScan 上查看
                 </div>
